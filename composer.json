@@ -1,0 +1,7 @@
+{
+    "name": "team1/neighborly",
+    "description": "A garage sale finder app",
+    "require": {
+        "php": "^8.4.12"
+    }
+}
