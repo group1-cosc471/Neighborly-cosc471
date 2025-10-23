@@ -1,0 +1,245 @@
+DROP DATABASE neighborly_lol;
+
+CREATE DATABASE neighborly_lol;
+
+USE neighborly_lol;
+
+CREATE TABLE
+    user (
+        u_id INT UNIQUE PRIMARY KEY,
+        f_name VARCHAR(50),
+        l_name VARCHAR(50),
+        email VARCHAR(100),
+        phone_number VARCHAR(10) -- Phone numbers from US and CA
+    );
+
+CREATE TABLE
+    sale (
+        sale_id INT UNIQUE PRIMARY KEY,
+        seller_id INT,
+        street_address VARCHAR(250),
+        municipality VARCHAR(250),
+        FOREIGN KEY (seller_id) REFERENCES user (u_id)
+    );
+
+CREATE TABLE
+    item (
+        item_id INT UNIQUE PRIMARY KEY,
+        sale_id INT,
+        reserved_by INT,
+        item_name VARCHAR(24),
+        item_dec TEXT,
+        price DECIMAL(5, 2),
+        FOREIGN KEY (sale_id) REFERENCES sale (sale_id),
+        FOREIGN KEY (reserved_by) REFERENCES user (u_id)
+    );
+
+    -- Insert users
+INSERT INTO
+    user (u_id, f_name, l_name, email, phone_number)
+VALUES
+    (
+        1,
+        'Alice',
+        'Johnson',
+        'alice.johnson@example.com',
+        '5551234567'
+    ),
+    (
+        2,
+        'Bob',
+        'Smith',
+        'bob.smith@example.com',
+        '5552345678'
+    ),
+    (
+        3,
+        'Carol',
+        'Miller',
+        'carol.miller@example.com',
+        '5553456789'
+    ),
+    (
+        4,
+        'David',
+        'Brown',
+        'david.brown@example.com',
+        '5554567890'
+    ),
+    (
+        5,
+        'Eve',
+        'Wilson',
+        'eve.wilson@example.com',
+        '5555678901'
+    ),
+    (
+        6,
+        'Frank',
+        'Taylor',
+        'frank.taylor@example.com',
+        '5556789012'
+    ),
+    (
+        7,
+        'Grace',
+        'Davis',
+        'grace.davis@example.com',
+        '5557890123'
+    ),
+    (
+        8,
+        'Henry',
+        'Martin',
+        'henry.martin@example.com',
+        '5558901234'
+    ),
+    (
+        9,
+        'Ivy',
+        'Anderson',
+        'ivy.anderson@example.com',
+        '5559012345'
+    ),
+    (
+        10,
+        'Jack',
+        'Thomas',
+        'jack.thomas@example.com',
+        '5550123456'
+    );
+
+-- Insert sales (each linked to a seller_id)
+INSERT INTO
+    sale (sale_id, seller_id, street_address, municipality)
+VALUES
+    (1, 1, '123 Maple St', 'Springfield'),
+    (2, 3, '45 Oak Ave', 'Shelbyville'),
+    (3, 5, '789 Pine Dr', 'Ogdenville'),
+    (4, 7, '56 Elm Blvd', 'North Haverbrook'),
+    (5, 9, '321 Cedar Way', 'Capital City');
+
+-- Insert items
+INSERT INTO
+    item (
+        item_id,
+        sale_id,
+        reserved_by,
+        item_name,
+        item_dec,
+        price
+    )
+VALUES
+    (
+        1,
+        1,
+        NULL,
+        'Lamp',
+        'A modern desk lamp with LED bulb',
+        12.50
+    ),
+    (
+        2,
+        1,
+        4,
+        'Chair',
+        'Wooden dining chair in good condition',
+        20.00
+    ),
+    (
+        3,
+        1,
+        NULL,
+        'Table',
+        'Round kitchen table with glass top',
+        45.00
+    ),
+    (
+        4,
+        2,
+        5,
+        'Bicycle',
+        'Adult road bike with 18 gears',
+        150.00
+    ),
+    (
+        5,
+        2,
+        NULL,
+        'Helmet',
+        'Bike helmet, size M',
+        25.00
+    ),
+    (
+        6,
+        2,
+        1,
+        'Backpack',
+        'Waterproof hiking backpack',
+        30.00
+    ),
+    (
+        7,
+        3,
+        NULL,
+        'TV',
+        '42-inch LED television',
+        200.00
+    ),
+    (
+        8,
+        3,
+        2,
+        'DVD Player',
+        'Sony DVD player with remote',
+        35.00
+    ),
+    (
+        9,
+        3,
+        NULL,
+        'Speakers',
+        'Pair of Bluetooth bookshelf speakers',
+        80.00
+    ),
+    (
+        10,
+        4,
+        NULL,
+        'Bookshelf',
+        '5-tier oak bookshelf',
+        60.00
+    ),
+    (
+        11,
+        4,
+        10,
+        'Mirror',
+        'Full-length mirror with wooden frame',
+        25.00
+    ),
+    (
+        12,
+        4,
+        NULL,
+        'Desk',
+        'Office desk with drawers',
+        90.00
+    ),
+    (13, 5, 6, 'Sofa', '2-seater leather sofa', 300.00),
+    (
+        14,
+        5,
+        NULL,
+        'Coffee Table',
+        'Glass-top coffee table',
+        75.00
+    ),
+    (
+        15,
+        5,
+        7,
+        'Rug',
+        'Large living room area rug',
+        120.00
+    );
