@@ -35,9 +35,10 @@ function getSale($id){
     global $conn;
     $query =  $conn->prepare(
         'SELECT *
-        FROM SALE
-        WHERE Sale_id = $id' //not sure if this syntax will work for prepared statements
+        FROM sale
+        WHERE sale_id = $id' //not sure if this syntax will work for prepared statements
     );
+    $query ->bind_param("i", $id)
     $result = $conn->query($query);
 
     return $result->fetch_assoc();
@@ -51,7 +52,7 @@ function getSalesBySeller($s_id){
     //table name is case sensitive
     $query = $conn->prepare('SELECT *
         FROM sale
-        WHERE Seller_id = ?');
+        WHERE seller_id = ?');
     $query->bind_param("i", $s_id); //this is how to add variables to prepared statements
     $query->execute();
 
