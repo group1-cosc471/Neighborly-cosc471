@@ -1,21 +1,29 @@
 //William Dalian
 <?php
-$sale_id
-$seller_id
-$sale_street_address
-$sale_municipality
+//use this to get the database connection
+require_once 'database.php';
+
+$sale_id;
+$seller_id;
+$sale_street_address;
+$sale_municipality;
 
  
 //get sales
 function getAllSales(){
-    $sales_list = []
-    $query -> (
-        'SELECT Sale_id, seller_id, Sale_street_address, Sale_municipality
-        FROM SALE'
-    ) ;
+    //I guess this is required for use inside php functions, my last project just used individual files so my bad
+    global $conn;
+    $sales_list = [];
 
-    while ($result -> $query.fetchRow()){
-        sales_list[] = [$result];
+    //syntax for defining query requires the connecttion to the database
+    $query = 
+        'SELECT Sale_id, seller_id, Sale_street_address, Sale_municipality
+        FROM SALE';
+    $result = $conn->query($query);
+
+    while ($row = $result->fetch_assoc()){ //use to get row from result
+        //append to an array like this othe
+        $sales_list[] = $row; //append row to list
     }
 
     return $sales_list;
@@ -23,26 +31,29 @@ function getAllSales(){
 
 //get sale by sale id
 function getSale($id){
-    $query -> (
+    global $conn;
+    $query =  $conn->prepare(
         'SELECT *
         FROM SALE
-        WHERE Sale_id = $id'
-    ) ;
+        WHERE Sale_id = $id' //not sure if this syntax will work for prepared statements
+    );
+    $result = $conn->query($query);
 
-    return $result - >$query.fetchRow();
+    return $result->fetch_assoc();
 }
 
 //get sales by seller_id
 function getSalesBySeller($s_id){
-    $sales_lst = []
-    $query -> (
-        'SELECT *
+    global $conn;
+    $sales_list = [];
+    $query = 'SELECT *
         FROM SALE
-        WHERE Seller_id = $s_id'
-    );
+        WHERE Seller_id = $s_id';
+    $result = $conn->query($query);
+    
 
-    while ($result -> $query.fetchRow()){
-        sales_list[] = [$result];
+    while ($row =  $result->fetch_assoc()){
+        $sales_list[] = $row;
     }
 
     return $sales_list;
