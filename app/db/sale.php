@@ -1,5 +1,6 @@
-//William Dalian
 <?php
+//William Dalian
+
 //use this to get the database connection
 require_once 'database.php';
 
@@ -17,8 +18,8 @@ function getAllSales(){
 
     //syntax for defining query requires the connecttion to the database
     $query = 
-        'SELECT Sale_id, seller_id, Sale_street_address, Sale_municipality
-        FROM SALE';
+        'SELECT sale_id, seller_id, street_address, municipality
+        FROM sale';
     $result = $conn->query($query);
 
     while ($row = $result->fetch_assoc()){ //use to get row from result
@@ -44,12 +45,17 @@ function getSale($id){
 
 //get sales by seller_id
 function getSalesBySeller($s_id){
+    //syntax for prepared statements is correct in this function. apply to other functions
     global $conn;
     $sales_list = [];
-    $query = 'SELECT *
-        FROM SALE
-        WHERE Seller_id = $s_id';
-    $result = $conn->query($query);
+    //table name is case sensitive
+    $query = $conn->prepare('SELECT *
+        FROM sale
+        WHERE Seller_id = ?');
+    $query->bind_param("i", $s_id); //this is how to add variables to prepared statements
+    $query->execute();
+
+    $result = $query->get_result();
     
 
     while ($row =  $result->fetch_assoc()){
