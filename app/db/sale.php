@@ -36,10 +36,10 @@ function getSale($id){
     $query =  $conn->prepare(
         'SELECT *
         FROM sale
-        WHERE sale_id = $id' //not sure if this syntax will work for prepared statements
+        WHERE sale_id = ? '
     );
     $query ->bind_param("i", $id)
-    $result = $conn->query($query);
+    $result = $query.get_result();
 
     return $result->fetch_assoc();
 }
