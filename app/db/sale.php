@@ -38,8 +38,8 @@ function getSale($id){
         FROM sale
         WHERE sale_id = ? '
     );
-    $query ->bind_param("i", $id)
-    $result = $query.get_result();
+    $query ->bind_param("i", $id);
+    $result = $query->get_result();
 
     return $result->fetch_assoc();
 }
