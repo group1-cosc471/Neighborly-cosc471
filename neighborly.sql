@@ -10,7 +10,8 @@ CREATE TABLE
         f_name VARCHAR(50),
         l_name VARCHAR(50),
         email VARCHAR(100),
-        phone_number VARCHAR(10) -- Phone numbers from US and CA
+        phone_number VARCHAR(10), -- Phone numbers from US and CA
+        user_password VARCHAR(50)
     );
 
 CREATE TABLE
