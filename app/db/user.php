@@ -72,9 +72,10 @@ function getUserById($conn, $user_id)
    return $result->fetch_assoc();
 }
 
-
-// Returns a list containing the associated ID, username, and password 
-// given a user's credentials.
+/***
+ * getUserLogin returns a list containing the associated ID, username,
+ * and password given a user's login credentials.
+ */
 function getUserLogin($conn, $email)
 {
    # Array containing the user's username (email), password, and user id
