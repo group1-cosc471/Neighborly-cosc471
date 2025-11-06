@@ -4,8 +4,12 @@
 // Establish the database connection
 require_once 'database.php';
 
-// This function is called when a user decides to create an account on
-// the website.
+/**
+ * createUser is called whenever a user decides to sign up and create
+ * an account on the website. The fields entered by the user are
+ * inserted into the database upon success, and an auto-incremented user
+ * ID is also assigned.
+ */
 function createUser($conn, $username, $password, $first_name, $last_name, $phone_number)
 {
    // Use the default PHP one-way hashing algorithm (bcrypt) to create a 
@@ -33,6 +37,41 @@ function createUser($conn, $username, $password, $first_name, $last_name, $phone
       return false;
    }
 }
+
+/***
+ * updateUser updates changed user account information and returns the
+ * user's ID.
+ */
+function updateUser($conn, $u_id, $fields) {}
+
+/***
+ * getUserById returns a user's information given their auto-incremented ID.
+ */
+function getUserById($conn, $user_id)
+{
+   // Prepare the query for execution
+   $query = $conn->prepare(
+      "SELECT u_id, email, first_name, last_name, phone_number FROM user WHERE u_id = ?"
+   );
+
+   // Bind query parameters
+   $query->bind_param("i", $user_id);
+
+   // Check to ensure that the query executed without any errors
+   if ($query->execute()) {
+      echo "Successfully retrieved user with ID" . $user_id;
+   } else {
+      echo "Error retrieving user with ID: " . $user_id;
+      return null;
+   }
+
+   // Get the result of the query if it executed
+   $result = $query->get_result();
+
+   // Return the results of the query
+   return $result->fetch_assoc();
+}
+
 
 // Returns a list containing the associated ID, username, and password 
 // given a user's credentials.
