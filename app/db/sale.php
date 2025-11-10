@@ -2,7 +2,7 @@
 //William Dalian
 
 //use this to get the database connection
-require_once 'database.php';
+require_once __DIR__ . '/database.php';
 
 $sale_id;
 $seller_id;

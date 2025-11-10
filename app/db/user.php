@@ -1,8 +1,9 @@
 <?php
+//user.php
 // Jason R.
 
 // Establish the database connection
-require_once 'database.php';
+require_once __DIR__ . '/database.php';
 
 // Declare variables for relevant user data
 $user_id;
@@ -14,8 +15,10 @@ $phone_number;
 
 // Returns a list containing the associated id, username, and password 
 // given a user's credentials
-function getUserLogin($conn, $email)
+function getUserLogin($email)
 {
+   global $conn;
+
    # Array containing the user's username (email), password, and user id
    $user = ['username' => $email, 'password' => '', 'u_id' => ''];
 

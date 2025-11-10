@@ -37,78 +37,18 @@ CREATE TABLE
 
     -- Insert users
 INSERT INTO
-    user (u_id, f_name, l_name, email, phone_number)
+    user (u_id, f_name, l_name, email, phone_number, user_password)
 VALUES
-    (
-        1,
-        'Alice',
-        'Johnson',
-        'alice.johnson@example.com',
-        '5551234567'
-    ),
-    (
-        2,
-        'Bob',
-        'Smith',
-        'bob.smith@example.com',
-        '5552345678'
-    ),
-    (
-        3,
-        'Carol',
-        'Miller',
-        'carol.miller@example.com',
-        '5553456789'
-    ),
-    (
-        4,
-        'David',
-        'Brown',
-        'david.brown@example.com',
-        '5554567890'
-    ),
-    (
-        5,
-        'Eve',
-        'Wilson',
-        'eve.wilson@example.com',
-        '5555678901'
-    ),
-    (
-        6,
-        'Frank',
-        'Taylor',
-        'frank.taylor@example.com',
-        '5556789012'
-    ),
-    (
-        7,
-        'Grace',
-        'Davis',
-        'grace.davis@example.com',
-        '5557890123'
-    ),
-    (
-        8,
-        'Henry',
-        'Martin',
-        'henry.martin@example.com',
-        '5558901234'
-    ),
-    (
-        9,
-        'Ivy',
-        'Anderson',
-        'ivy.anderson@example.com',
-        '5559012345'
-    ),
-    (
-        10,
-        'Jack',
-        'Thomas',
-        'jack.thomas@example.com',
-        '5550123456'
-    );
+    (1, 'Alice', 'Johnson', 'alice.johnson@example.com', '5551234567', 'password1'),
+    (2, 'Bob', 'Smith', 'bob.smith@example.com', '  552345678', 'password2'),
+    (3, 'Carol', 'Miller', 'carol.miller@example.com', '5553456789', 'password3'),
+    (4, 'David', 'Brown', 'david.brown@example.com', '5554567890', 'password4'),
+    (5, 'Eve', 'Wilson', 'eve.wilson@example.com', '5555678901', 'password5'),
+    (6, 'Frank', 'Taylor', 'frank.taylor@example.com', '5556789012', 'password6'),
+    (7, 'Grace', 'Davis', 'grace.davis@example.com', '5557890123', 'password7'),
+    (8, 'Henry', 'Martin', 'henry.martin@example.com', '5558901234', 'password8'),
+    (9, 'Ivy', 'Anderson', 'ivy.anderson@example.com', '5559012345', 'password9'),
+    (10, 'Jack', 'Thomas', 'jack.thomas@example.com', '5550123456', 'password10');
 
 -- Insert sales (each linked to a seller_id)
 INSERT INTO

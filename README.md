@@ -5,7 +5,7 @@ William: sale.php
 Jason: user.php
 Sadman: createuser.php
 Darius: items.php
-Patrick: login.php
+Patrick: login.php, listsales.php
 
 Setup steps:
 Open mysql terminal as root user
