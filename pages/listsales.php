@@ -2,10 +2,14 @@
 //Patrick Martus
 //listsales.php
 
+
+
 function init()
 {
     $acknowlegement = '';
     require_once '../app/db/sale.php';
+    require_once '../app/db/user.php';
+    require_once '../app/db/items.php';
 
     $sales = getAllSales();
 
@@ -22,15 +26,21 @@ function init()
     HTML;
 
     //append each sale from the database into the table
-    foreach($sales as $sale) {
+    foreach ($sales as $sale) {
+        $host = getFirstAndLastName($sale['seller_id']);
+        $numItems = itemsInSale($sale['sale_id']);
         $list .= "<tr>
-                <td>{$sale['street_address']}, {$sale['municipality']}</td>
-                </tr>";//todo add seller and number of items, make sale location a link to the sale page
+                    <td>
+                        <button class='btn btn-primary sale-button' onclick=\"window.location.href='index.php?page=viewsale&id={$sale['sale_id']}'\">
+                        {$sale['street_address']}, {$sale['municipality']}
+                        </button>
+                    </td>
+                    <td>{$host['f_name']}, {$host['l_name']}</td>
+                    <td>{$numItems}</td>
+                </tr>"; //todo add seller and number of items, make sale location a link to the sale page
     }
 
     $list .= "</table>";
 
     return [$acknowlegement, $list];
 }
-
-?>

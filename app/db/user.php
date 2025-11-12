@@ -51,3 +51,29 @@ function getUserLogin($email)
    // Return the user's credentials
    return $user;
 }
+
+//retrieve the user by id number
+function getFirstAndLastName($id) {
+   global $conn;
+
+   //prepare the query
+   $query = $conn->prepare(
+      "SELECT f_name, l_name
+      FROM user
+      WHERE u_id = ?"
+   );
+
+   //bind parameters
+   $query->bind_param("i", $id);
+
+   //run the query
+   $query->execute();
+
+   //get the result
+   $result = $query->get_result();
+
+  if($row = $result->fetch_assoc())
+      return $row;
+   else
+      return 0;
+}
