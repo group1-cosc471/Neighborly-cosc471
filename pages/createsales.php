@@ -19,6 +19,7 @@
                 <label for="municipality" class="space">City/Town</label>
                 <input type="text" class="form-control" name="municipality" id="municipality" value="">
             </div>
+            <input type="submit" name="submit" class="btn btn-primary" value="create sale">&nbsp;&nbsp;
         </form>
 
         <?php if (!empty($message)):?>
