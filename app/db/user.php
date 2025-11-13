@@ -39,7 +39,7 @@ function createUser($conn, $username, $password, $first_name, $last_name, $phone
 }
 
 /***
- * updateUser updates changed user account information and returns the
+ * TODO: updateUser updates changed user account information and returns the
  * user's ID.
  */
 function updateUser($conn, $u_id, $fields) {}
