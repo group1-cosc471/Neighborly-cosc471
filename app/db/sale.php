@@ -65,4 +65,22 @@ function getSalesBySeller($s_id){
 
     return $sales_list;
 }
+
+//backend function to update a sale with a given sale_id
+function updateSale($sale_id, $streetAddress, $municipality){
+    global; $conn;
+
+    $stmt = $conn -> prepare('UPDATE sale SET name = ?, street_address = ?, municipality = ?');
+    $stmt -> bindParam ("iss", $sale_id, $streetAddress, $municipality)
+
+    if($stmt -> execute()){
+        return 0;
+    }
+
+    else {
+        return 1;
+    }
+
+
+}
 ?>
