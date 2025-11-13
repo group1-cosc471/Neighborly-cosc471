@@ -1,3 +1,7 @@
+<?php 
+//William Dalian
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -26,7 +30,6 @@
 </html>
 
 <?php
-//William Dalian
 require_once '../app/db/sale.php';
 $message = "";
 
