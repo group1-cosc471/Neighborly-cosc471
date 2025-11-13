@@ -16,12 +16,19 @@
                 <input type="text" class="form-control" name="municipality" id="municipality" value="">
             </div>
         </form>
+
+        <?php if (!empty($message)):?>
+            <div class = "user-message">
+                <?php echo $message; ?>
+            </div>
+        <?php endif; ?>
     </body>
 </html>
 
 <?php
 //William Dalian
 require_once '../app/db/sale.php';
+$message = "";
 
 //get data from form post, pass it to the backend post sale function
 if (isset($_POST['submit'])){
@@ -30,7 +37,17 @@ if (isset($_POST['submit'])){
 
     $result = postSale($street, $municipality);
 
-    //TODO: create error handling (display relevant error code)
+    if ($result = 0){
+        $message = "Succesfully posted sale. Thank you.";
+    }
+
+    if ($result = 1){
+        $message = "Error creating sale. Please try again.";
+    }
+
+    if ($result = 2){
+        $message = "Error: you must be logged in to create a sale.";
+    }
 }
 
 ?>
