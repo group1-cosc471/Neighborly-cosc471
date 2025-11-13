@@ -65,4 +65,33 @@ function getSalesBySeller($s_id){
 
     return $sales_list;
 }
+
+//posts sale data to the database. Usese session variables
+//to get seller id. Returns 0 for success, 1 for database
+//posting failue, 2 for if the user is not logged in
+function postSale( $streetAddress, $municipality){
+    $seller_id;
+
+    //check if a session id is set (user logged in)
+    if (isset($_SESSION['user'])){
+        $seller_id = $_SESSION['user'] 
+
+        global $conn;
+        $statement =  $conn->prepare(
+            'INSERT INTO sale (seller_id, street_address, municipality) VALUES (?, ?, ?)'
+        );
+        $statement ->bind_param("iss", $seller_id, $streetAddress, $municipality);
+        
+        if($statement -> execute()){
+            return 0;
+        }
+
+        else{
+            return 1;
+            }    
+    else {
+        return 2;
+        }
+    }    
+}
 ?>

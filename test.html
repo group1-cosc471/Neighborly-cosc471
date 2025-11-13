@@ -18,20 +18,3 @@
         </form>
     </body>
 </html>
-
-<?php
-//William Dalian
-require_once '../app/db/sale.php';
-
-//get data from form post, pass it to the backend post sale function
-if (isset($_POST['submit'])){
-    $street = $_POST['streetAddr'];
-    $municipality = $_POST['municipality'];
-
-    $result = postSale($street, $municipality);
-
-    //TODO: create error handling (display relevant error code)
-}
-
-?>
-
