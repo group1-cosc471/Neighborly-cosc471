@@ -1,9 +1,9 @@
 # Neighborly-cosc471-
 Repository for COSC471 Database Priciples Group 1 project: Neighborly: a garage sale database application.
-Zinet: index.php createitem.php viewitem.php searchresults.php
-William: sale.php, createsales.php updateSale.php viewsale.php
+Zinet: index.php createitem.php  searchresults.php
+William: sale.php, createsales.php updateSale.php 
 Jason: user.php updateuser.php
-Sadman: createuser.php
+Sadman: createuser.php viewsale.php viewitem.php
 Darius: items.php
 Patrick: login.php, listsales.php routes.php updateitem.php
 Setup steps:
