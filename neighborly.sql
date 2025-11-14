@@ -20,6 +20,13 @@ CREATE TABLE
         seller_id INT,
         street_address VARCHAR(250),
         municipality VARCHAR(250),
+        --added fields
+        s_date DATE,
+        e_date DATE,
+        open_time TIME,
+        close_time TIME,
+        sale_type VARCHAR(20),
+
         FOREIGN KEY (seller_id) REFERENCES user (u_id)
     );
 
@@ -52,13 +59,13 @@ VALUES
 
 -- Insert sales (each linked to a seller_id)
 INSERT INTO
-    sale (sale_id, seller_id, street_address, municipality)
+    sale (sale_id, seller_id, street_address, municipality, s_date, e_date, open_time, close_time, sale_type)
 VALUES
-    (1, 1, '123 Maple St', 'Springfield'),
-    (2, 3, '45 Oak Ave', 'Shelbyville'),
-    (3, 5, '789 Pine Dr', 'Ogdenville'),
-    (4, 7, '56 Elm Blvd', 'North Haverbrook'),
-    (5, 9, '321 Cedar Way', 'Capital City');
+    (1, 1, '123 Maple St', 'Springfield', '2025-12-01', '2025-12-05', '10:00:00', '16:00:00', 'Garage'),
+    (2, 3, '45 Oak Ave', 'Shelbyville', '2025-10-30', '2025-11-09', '09:00:00', '17:00:00', 'Estate'),
+    (3, 5, '789 Pine Dr', 'Ogdenville', '2025-11-14', '2025-11-16', '12:00:00', '19:00:00', 'Estate'),
+    (4, 7, '56 Elm Blvd', 'North Haverbrook', '2025-11-27', '2025-12-01', '11:00:00', '16:30:00', 'Moving'),
+    (5, 9, '321 Cedar Way', 'Capital City', '2026-01-01', '2026-01-17', '13:30:00', '20:00:00', 'Yard');
 
 -- Insert items
 INSERT INTO
