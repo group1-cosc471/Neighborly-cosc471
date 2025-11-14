@@ -26,7 +26,7 @@ function getAllSales(){
         FROM sale';
     $result = $conn->query($query);
 
-    while ($row = $result->fetch_assoc()){ //use to get row from result
+    while ($row = $result->fetch_assoc()) { //use to get row from result
         //append to an array like this othe
         $sales_list[] = $row; //append row to list
     }
@@ -35,21 +35,23 @@ function getAllSales(){
 }
 
 //get sale by sale id
-function getSale($id){
+function getSale($id)
+{
     global $conn;
     $query =  $conn->prepare(
         'SELECT *
         FROM sale
         WHERE sale_id = ? '
     );
-    $query ->bind_param("i", $id);
+    $query->bind_param("i", $id);
     $result = $query->get_result();
 
     return $result->fetch_assoc();
 }
 
 //get sales by seller_id
-function getSalesBySeller($s_id){
+function getSalesBySeller($s_id)
+{
     //syntax for prepared statements is correct in this function. apply to other functions
     global $conn;
     $sales_list = [];
@@ -61,9 +63,9 @@ function getSalesBySeller($s_id){
     $query->execute();
 
     $result = $query->get_result();
-    
 
-    while ($row =  $result->fetch_assoc()){
+
+    while ($row =  $result->fetch_assoc()) {
         $sales_list[] = $row;
     }
 
