@@ -77,8 +77,8 @@ function getSalesBySeller($s_id)
 //returns 0 to inditcate a success, 2 if the user is not logged in, or is not the user associated
 //with the sale, or 1 if there is another fault.
 function postSale($streetAddress, $municipality, $s_date, $e_date, $open_time, $close_time, $sale_type){
-    if isset($_SESSION['user']){
-        $u_id = $_SESSION['user']
+    if (isset($_SESSION['user'])) {
+        $u_id = $_SESSION['user'];
 
         global $conn;
         $stmt = $conn ->prepare(
@@ -107,7 +107,7 @@ function updateSale($sale_id, $streetAddress, $municipality, $s_date, $e_date, $
 
     $stmt = $conn -> prepare('UPDATE sale SET street_address = ?, municipality = ?, s_date = ?, e_date = ?, open_time = ?, close_time = ? sale_type = ?
                                 WHERE sale_id = ?');
-    $stmt -> bindParam ("ssssssi", $streetAddress, $municipality, $s_date, $e_date, $open_time, $close_time, $sale_id);
+    $stmt -> bind_param("ssssssi", $streetAddress, $municipality, $s_date, $e_date, $open_time, $close_time, $sale_id);
 
 
     if($stmt -> execute()){
@@ -117,7 +117,5 @@ function updateSale($sale_id, $streetAddress, $municipality, $s_date, $e_date, $
     else {
         return 1;
     }
-
-
 }
 ?>
