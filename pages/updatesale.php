@@ -114,6 +114,6 @@ function init($id)
             }
         }
     }
-    return [$message, $list];
+    return [$message, $form];
 }
 ?>

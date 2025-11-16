@@ -23,6 +23,9 @@ if(isset($_GET['page']))
     } elseif ($_GET['page'] === "viewsale") {
         require_once 'viewsale.php';
         $result = init($_GET['id']); //viewsale shouldn't be called without an id
+    } elseif($_GET['page'] === "updatesale") {
+        require_once 'updatesale.php';
+        $result = init($_GET['id']);
     } else {
         header('location:' . $path); //if no page is set set the page to login
     }
