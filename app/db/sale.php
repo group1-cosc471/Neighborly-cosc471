@@ -14,7 +14,7 @@ $sale_street_address;
 $sale_municipality;
 
  
-//get all sales
+//get all sales: quereies and retuns a list of all sales
 function getAllSales(){
     //I guess this is required for use inside php functions, my last project just used individual files so my bad
     global $conn;
@@ -34,7 +34,8 @@ function getAllSales(){
     return $sales_list;
 }
 
-//get sale by sale id
+//get sale by sale id. Queries the database for a sale with a given sale id,
+//returns it if found
 function getSale($id)
 {
     global $conn;
@@ -49,7 +50,8 @@ function getSale($id)
     return $result->fetch_assoc();
 }
 
-//get sales by seller_id
+//get sales by seller_id. Queries the database for a sale associated with a given user id
+//returns them as a list
 function getSalesBySeller($s_id)
 {
     //syntax for prepared statements is correct in this function. apply to other functions
@@ -77,8 +79,8 @@ function getSalesBySeller($s_id)
 //returns 0 to inditcate a success, 2 if the user is not logged in, or is not the user associated
 //with the sale, or 1 if there is another fault.
 function postSale($streetAddress, $municipality, $s_date, $e_date, $open_time, $close_time, $sale_type){
-    if isset($_SESSION['user']){
-        $u_id = $_SESSION['user']
+    if (isset($_SESSION['user'])){
+        $u_id = $_SESSION['user'];
 
         global $conn;
         $stmt = $conn ->prepare(
@@ -86,7 +88,6 @@ function postSale($streetAddress, $municipality, $s_date, $e_date, $open_time, $
             VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
 
         $stmt -> bind_param("isssssss", $u_id, $streetAddress, $municipality, $s_date, $e_date, $open_time, $close_time, $sale_type);
-
 
         if ($stmt -> execute()){
             return 0;
@@ -107,17 +108,14 @@ function updateSale($sale_id, $streetAddress, $municipality, $s_date, $e_date, $
 
     $stmt = $conn -> prepare('UPDATE sale SET street_address = ?, municipality = ?, s_date = ?, e_date = ?, open_time = ?, close_time = ? sale_type = ?
                                 WHERE sale_id = ?');
-    $stmt -> bindParam ("ssssssi", $streetAddress, $municipality, $s_date, $e_date, $open_time, $close_time, $sale_id);
+    $stmt -> bind_param("ssssssi", $streetAddress, $municipality, $s_date, $e_date, $open_time, $close_time, $sale_id);
 
 
     if($stmt -> execute()){
         return 0;
     }
-
     else {
         return 1;
     }
-
-
 }
 ?>

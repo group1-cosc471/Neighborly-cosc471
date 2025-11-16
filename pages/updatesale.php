@@ -3,12 +3,21 @@
 //Updates the selected sale.
 
 //Retrieves the current values for the attributes for the selected sale. Prefills a form with those values,
-//and allows the user to change the values. On submission, gets the values, and calls updateSale in sale.php
-//to make an SQL request to the database to update the values for this sale.
+//and allows the user to change the values. On submission, gets the values posted, and calls updateSale in sale.php
+//to make an SQL request to the database to update the values for the sale.
+
+$street =  "";
+$municipality =  "";
+$s_date =  "";
+$e_date = "";
+$open_time =  "";
+$close_time =  "";
+$sale_type =  "";
 ?>
 
 <!DOCTYPE html>
 <html>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <head>
         <Title> Update Sale </Title>
     </head>
@@ -18,31 +27,31 @@
             <h2>Update Sale</h2>
             <div class="form-group">
                 <label for="streetAddr" class="space">Street Address</label>
-                <input type="text" class="form-control" name="streetAddr" id="streetAddr" value="<?php echo htmlspecialchars($street); ?>">
+                <input type="text" class="form-control" name="streetAddr" id="streetAddr" value="<?php echo htmlspecialchars($street); ?>"required>
             </div>
             <div class="form-group">
                 <label for="municipality" class="space">City/Town</label>
-                <input type="text" class="form-control" name="municipality" id="municipality" value="<?php echo htmlspecialchars($municipality); ?>">
+                <input type="text" class="form-control" name="municipality" id="municipality" value="<?php echo htmlspecialchars($municipality); ?>"required>
             </div>
             <div class="form-group">
                 <label for="start_date" class="space">Start date</label>
-                <input type="date" name="start_date" id="start_date" value="<?php echo htmlspecialchars($s_date); ?>">
+                <input type="date" name="start_date" id="start_date" value="<?php echo htmlspecialchars($s_date); ?>"required>
             </div>
             <div class="form-group">
                 <label for="end_date" class="space">End date</label>
-                <input type="date" name="end_date" id="start_date" value="<?php echo htmlspecialchars($e_date); ?>">
+                <input type="date" name="end_date" id="start_date" value="<?php echo htmlspecialchars($e_date); ?>"required>
             </div>
             <div class="form-group">
                 <label for="open_time" class="space">Open Time</label>
-                <input type="time" name="open_time" id="open_time" value="<?php echo htmlspecialchars($open_time); ?>">
+                <input type="time" name="open_time" id="open_time" value="<?php echo htmlspecialchars($open_time); ?>"required>
             </div>
             <div class="form-group">
                 <label for="end_date" class="space">Open Time</label>
-                <input type="time" name="close_time" id="close_time" value="<?php echo htmlspecialchars($close_time); ?>">
+                <input type="time" name="close_time" id="close_time" value="<?php echo htmlspecialchars($close_time); ?>"required>
             </div>
             <div class="form-group">
                 <label for="sale_type" class="space">Type of Sale</label>
-                <input type="text" class="form-control" name="sale_type" id="sale_type" value="<?php echo htmlspecialchars($sale_type); ?>">
+                <input type="text" class="form-control" name="sale_type" id="sale_type" value="<?php echo htmlspecialchars($sale_type); ?>"required>
             </div>
         <input type="submit" name="update-sale" class="btn btn-primary" value ="Update Sale">&nbsp;&nbsp;
         </form>
@@ -66,17 +75,18 @@ $sale_id;
 //for this sales, attributes, so the values can be filled in as default form
 //values for the update form.
 if (isset($_SESSION['user'])){
-    $seller_id = $_SESSION['user']
-    $sale_id = ;
+    $seller_id = $_SESSION['user'];
+    $sale_id = "";
 
     $sale = getSale($sale_id);
-    $street = $sale['street_address'];
-    $municipality = $sale['municipality'];
-    $s_date = $sale['s_date'];
-    $e_date = $sale['e_date'];
-    $open_time = $sale['open_time'];
-    $close_time = $sale['close_time'];
-    $sale_type = $sale['sale_type'];
+
+    $street =  htmlspecialchars($_POST['streetAddr'] ?? "");
+    $municipality =  htmlspecialchars($_POST['municipality'] ?? "");
+    $s_date =  htmlspecialchars($_POST['start_date'] ?? "");
+    $e_date =  htmlspecialchars($_POST['end_date'] ?? "");
+    $open_time =  htmlspecialchars($_POST['open_time'] ?? "");
+    $close_time =  htmlspecialchars($_POST['close_time'] ?? "");
+    $sale_type =  htmlspecialchars($_POST['sale_type'] ?? "");
 
 
     //when a user selects the submit button, get the user's values from the form, and
@@ -95,18 +105,20 @@ if (isset($_SESSION['user'])){
         $result = updateSale($sale_id, $street, $municipality, $s_date, $e_date, $open_time, $close_time, $sale_type);
 
         //display to the user the result of the update submission
-        if ($result = 0){
+        //if success: display a success message
+        if ($result == 0){
             $message = "Succesfully updated sale. Thank you.";
         }
-
-        if ($result = 1){
+        //if theres an error creatinf the sale, display an error messsage.
+        if ($result == 1){
             $message = "Error creating sale. Please try again.";
         }
+    //if the user is not logged into the correct account, return a message stating such
     else{
-        $message ="Please login to the correct account before updating a sale."
+        $message ="Please login to the correct account before updating a sale.";
     }
 
 }
-
+}
 
 ?>

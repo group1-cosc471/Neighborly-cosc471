@@ -20,7 +20,6 @@ CREATE TABLE
         seller_id INT,
         street_address VARCHAR(250),
         municipality VARCHAR(250),
-        --added fields
         s_date DATE,
         e_date DATE,
         open_time TIME,
@@ -47,7 +46,7 @@ INSERT INTO
     user (u_id, f_name, l_name, email, phone_number, user_password)
 VALUES
     (1, 'Alice', 'Johnson', 'alice.johnson@example.com', '5551234567', 'password1'),
-    (2, 'Bob', 'Smith', 'bob.smith@example.com', '  552345678', 'password2'),
+    (2, 'Bob', 'Smith', 'bob.smith@example.com', '552345678', 'password2'),
     (3, 'Carol', 'Miller', 'carol.miller@example.com', '5553456789', 'password3'),
     (4, 'David', 'Brown', 'david.brown@example.com', '5554567890', 'password4'),
     (5, 'Eve', 'Wilson', 'eve.wilson@example.com', '5555678901', 'password5'),
