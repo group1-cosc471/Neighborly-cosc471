@@ -1,21 +1,13 @@
 <?php
-//William Dalian
-//Updates the selected sale.
-
-//Retrieves the current values for the attributes for the selected sale. Prefills a form with those values,
-//and allows the user to change the values. On submission, gets the values, and calls updateSale in sale.php
-//to make an SQL request to the database to update the values for this sale.
-?>
-
-<!DOCTYPE html>
-<html>
-
-</html>
-
-<?php
 function init($id)
 {
-            
+    //William Dalian
+    //Updates the selected sale.
+
+    //Retrieves the current values for the attributes for the selected sale. Prefills a form with those values,
+    //and allows the user to change the values. On submission, gets the values, and calls updateSale in sale.php
+    //to make an SQL request to the database to update the values for this sale.
+
     require_once '../app/db/sale.php';
     $message = "";
 
@@ -38,7 +30,7 @@ function init($id)
         $close_time = $sale['close_time'];
         $sale_type = $sale['sale_type'];
 
-        
+
         $form = <<<HTML
             <head>
                 <Title> Update Sale </Title>
@@ -116,4 +108,3 @@ function init($id)
     }
     return [$message, $form];
 }
-?>

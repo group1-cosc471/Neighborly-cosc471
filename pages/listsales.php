@@ -51,7 +51,8 @@ function init()
         $list .= "</tr>"; //todo add seller and number of items, make sale location a link to the sale page
     }
 
-    $list .= "</table>";
+    $list .= "</table>
+        <button class='btn btn-primary new-sale-button' onclick=\"window.location.href='index.php?page=createsale'\">New Sale</button>";
 
     return [$acknowlegement, $list];
 }
