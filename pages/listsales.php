@@ -25,8 +25,10 @@ function init()
             </tr>
     HTML;
 
+
     //append each sale from the database into the table
     foreach ($sales as $sale) {
+        
         $host = getFirstAndLastName($sale['seller_id']);
         $numItems = itemsInSale($sale['sale_id']);
         $list .= "<tr>
@@ -36,11 +38,21 @@ function init()
                         </button>
                     </td>
                     <td>{$host['f_name']}, {$host['l_name']}</td>
-                    <td>{$numItems}</td>
-                </tr>"; //todo add seller and number of items, make sale location a link to the sale page
+                    <td>{$numItems}</td>";
+        if (isset($_SESSION['user'])) {
+            if($_SESSION['user'] == $sale['seller_id'])
+                $list .= "<td>
+                            <button class='btn btn-primary sale-button' onclick=\"window.location.href='index.php?page=updatesale&id={$sale['sale_id']}'\">
+                                Edit
+                            </button>
+                         </td>";
+        }
+
+        $list .= "</tr>"; //todo add seller and number of items, make sale location a link to the sale page
     }
 
-    $list .= "</table>";
+    $list .= "</table>
+        <button class='btn btn-primary new-sale-button' onclick=\"window.location.href='index.php?page=createsale'\">New Sale</button>";
 
     return [$acknowlegement, $list];
 }

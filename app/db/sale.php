@@ -45,6 +45,7 @@ function getSale($id)
         WHERE sale_id = ? '
     );
     $query->bind_param("i", $id);
+    $query->execute();
     $result = $query->get_result();
 
     return $result->fetch_assoc();
@@ -79,7 +80,7 @@ function getSalesBySeller($s_id)
 //returns 0 to inditcate a success, 2 if the user is not logged in, or is not the user associated
 //with the sale, or 1 if there is another fault.
 function postSale($streetAddress, $municipality, $s_date, $e_date, $open_time, $close_time, $sale_type){
-    if (isset($_SESSION['user'])){
+    if (isset($_SESSION['user'])) {
         $u_id = $_SESSION['user'];
 
         global $conn;

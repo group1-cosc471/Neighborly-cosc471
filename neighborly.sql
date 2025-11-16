@@ -10,7 +10,7 @@ CREATE TABLE
         f_name VARCHAR(50),
         l_name VARCHAR(50),
         email VARCHAR(100),
-        phone_number VARCHAR(10), -- Phone numbers from US and CA
+        phone_number VARCHAR(10), /*Phone numbers from US and CA*/
         user_password VARCHAR(50)
     );
 
@@ -20,6 +20,7 @@ CREATE TABLE
         seller_id INT,
         street_address VARCHAR(250),
         municipality VARCHAR(250),
+        /*added fields*/
         s_date DATE,
         e_date DATE,
         open_time TIME,
