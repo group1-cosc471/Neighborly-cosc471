@@ -14,7 +14,7 @@ $sale_street_address;
 $sale_municipality;
 
  
-//get all sales
+//get all sales: quereies and retuns a list of all sales
 function getAllSales(){
     //I guess this is required for use inside php functions, my last project just used individual files so my bad
     global $conn;
@@ -34,7 +34,8 @@ function getAllSales(){
     return $sales_list;
 }
 
-//get sale by sale id
+//get sale by sale id. Queries the database for a sale with a given sale id,
+//returns it if found
 function getSale($id)
 {
     global $conn;
@@ -50,7 +51,8 @@ function getSale($id)
     return $result->fetch_assoc();
 }
 
-//get sales by seller_id
+//get sales by seller_id. Queries the database for a sale associated with a given user id
+//returns them as a list
 function getSalesBySeller($s_id)
 {
     //syntax for prepared statements is correct in this function. apply to other functions
@@ -88,7 +90,6 @@ function postSale($streetAddress, $municipality, $s_date, $e_date, $open_time, $
 
         $stmt -> bind_param("isssssss", $u_id, $streetAddress, $municipality, $s_date, $e_date, $open_time, $close_time, $sale_type);
 
-
         if ($stmt -> execute()){
             return 0;
         }
@@ -114,7 +115,6 @@ function updateSale($sale_id, $streetAddress, $municipality, $s_date, $e_date, $
     if($stmt -> execute()){
         return 0;
     }
-
     else {
         return 1;
     }

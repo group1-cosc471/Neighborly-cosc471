@@ -10,6 +10,14 @@ function init($id)
 
     require_once '../app/db/sale.php';
     $message = "";
+  
+    $street =  "";
+    $municipality =  "";
+    $s_date =  "";
+    $e_date = "";
+    $open_time =  "";
+    $close_time =  "";
+    $sale_type =  "";
 
     $seller_id;
     $sale_id;
