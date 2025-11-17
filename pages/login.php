@@ -1,5 +1,9 @@
 <?php
 //Patrick Martus
+
+//login page
+//calls the get user function from the user file to get the password from the database and compares to the entered password.
+//if successful sets the  session user_id and email.
 function init() {
     $acknowlegement = '';
     require_once '../app/db/user.php';
@@ -14,21 +18,22 @@ function init() {
         $email = $_REQUEST['email'];
         $password = $_REQUEST['password'];
         
-        //create bindings
-        $credentials = [[':email', $email, 'str']];
+        // //create bindings
+        // $credentials = [[':email', $email, 'str']];
         
         //execute the statement
-        $user = getUserLogin($credentials);
+        $user = getUserLogin( $email);
         
         //if a password and a status are returned from the database
-        if (!empty($user[0]['password'])) {
+        if (!empty($user['password'])) {
             
             //check if the password is a match
-            if($user[0]['password']===$password) {
-                $_SESSION['user']=$email;
-                $_SESSION['name']=$user[0]['name'];
+            if($user['password']===$password) {
+                $_SESSION['user']= $user['u_id'];
+                $_SESSION['name']=$user['email']; //todo set to first and last name
 
-                header("location: index.php?page=welcome");
+                header("location: index.php?page=listsales");
+                exit();
             } else { $aknowlegement = 'invalid password'; }
         } else {
             $acknowlegement = 'invalid email';

@@ -1,30 +1,35 @@
 <?php
-//* Final Homework - Routing
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
+//index.php
 
-//sets default page to login
-$path = "index.php?page=login";
-
-//routing keeps everything under index
-if(isset($_GET['page']))
-{
-    if($_GET['page'] === "login")
-    {
-        require_once 'login.php';
-        $result = init();
-    } elseif ($_GET['page'] === "sales")
-    {
-        //option for if sales page was used
-    } else {
-        header('location:' . $path); //if no page is set set the page to login
-    }
-} else 
-{
-    header('location:' . $path); //if the page variable isn't set at all set page to login
-}
-
-echo($result[1]);
+require_once('routes.php');
 
 ?>
+
+<html>
+    <head>
+        <title>neighborly</title>
+        <link rel="stylesheet" href="../public/assets/css/neighborly.css">
+        <link rel="stylesheet" href="../public/styles/main.css">
+    </head>
+<body class="container">
+   <header class="site-header">
+    <img src="../images/logo1.png" alt="Neighborly Logo" class="logo" style="height:60px !important; width:auto !important;"">
+        <h1>Neighborly</h1>
+        <nav>
+            <a href="index.php?page=login">Login</a> |
+            <a href="index.php?page=listsales">List Sales</a> |
+            <a href="index.php?page=createsale">Create Sale</a>
+        </nav>
+        <hr>
+    </header>
+    <?php
+    echo ($result[1]);
+    ?>
+
+    <!-- FOOTER -->
+    <footer>
+        <hr>
+        <p>&copy; 2025 Neighborly</p>
+    </footer>
+</body>
+</html>
