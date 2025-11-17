@@ -1,6 +1,9 @@
 <?php
 //William Dalian
-
+//Displays the form to add a sale to the database.
+//checks if a user is logged in, if so displays the form
+//Then on submit, gets the values from the posted form. Then calls sale.php to create and execute
+//the create request for the resource.
 function init($user_id)
 {
     require_once '../app/db/sale.php';
@@ -16,6 +19,7 @@ function init($user_id)
 
     $form;
 
+    //if user is set
     if (isset($_SESSION['user'])) {
         $seller_id = $_SESSION['user'];
 
@@ -76,7 +80,7 @@ function init($user_id)
             </body>
             HTML;
 
-
+    //check if the form is submitted. Get post values
     if (isset($_POST['post-sale'])) {
         $street =  htmlspecialchars($_POST['streetAddr'] ?? "");
         $municipality =  htmlspecialchars($_POST['municipality'] ?? "");
