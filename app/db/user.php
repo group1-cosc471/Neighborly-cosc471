@@ -1,8 +1,8 @@
 <?php
-// Jason R.
+//user.php - Jason R.
 
 // Establish the database connection
-require_once 'database.php';
+require_once __DIR__ . '/database.php';
 
 /**
  * createUser is called whenever a user decides to sign up and create
@@ -10,101 +10,144 @@ require_once 'database.php';
  * inserted into the database upon success, and an auto-incremented user
  * ID is also assigned.
  */
-function createUser($conn, $username, $password, $first_name, $last_name, $phone_number)
+function createUser($username, $password, $f_name, $l_name, $phone_number)
 {
+   global $conn;
+
    // Use the default PHP one-way hashing algorithm (bcrypt) to create a 
    // hashed password.
    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
    // Prepare the query for execution
    $query = $conn->prepare(
-      "INSERT INTO user (email, user_password, first_name, last_name, phone_number)
-      VALUES (?, ?, ?, ?, ?, ?)"
+      "INSERT INTO user (email, user_password, f_name, l_name, phone_number)
+         VALUES (?, ?, ?, ?, ?)"
    );
 
    // Bind query parameters
-   $query->bind_param("ssssss", $username, $hashed_password, $first_name, $last_name, $phone_number);
+   $query->bind_param("sssss", $username, $hashed_password, $f_name, $l_name, $phone_number);
 
    // Execute the query
    if ($query->execute()) {
       // Upon the successful creation of an account, insert the auto
       // incremented ID of the newly inserted user.
-      $user_id = $conn->insert_id;
-      echo "New user was created successfully with ID: " . $user_id;
-      return $user_id;
+      $id = $conn->insert_id;
+      echo "New user was created successfully with ID: " . $id;
+      return $id;
    } else {
       echo "An error was encountered while creating a new user: " . $query->error;
       return false;
    }
 }
 
-/***
- * TODO: updateUser updates changed user account information and returns the
- * user's ID.
+/**
+ * getUserFullName retrieves the user's first and last name given their 
+ * auto-incremented user ID.
  */
-function updateUser($conn, $u_id, $fields) {}
-
-/***
- * getUserById returns a user's information given their auto-incremented ID.
- */
-function getUserById($conn, $user_id)
+function getUserFullName($id)
 {
+   global $conn;
+
+   // Prepare the query
+   $query = $conn->prepare(
+      "SELECT f_name, l_name
+         FROM user
+         WHERE u_id = ?"
+   );
+
+   // Bind parameters
+   $query->bind_param("i", $id);
+
+   // Run the query
+   if (!$query->execute()) {
+      echo "Error retrieving user name with ID: " . $id;
+      return null;
+   }
+
+   // Get the result
+   $result = $query->get_result();
+   $row = $result->fetch_assoc();
+
+   // Check to make sure the results exist and return accordingly
+   if ($row) {
+      return $row;
+   } else {
+      return null;
+   }
+}
+
+/**
+ * getUserById returns a user's information given their auto-incremented 
+ * user ID.
+ */
+function getUserById($id)
+{
+   global $conn;
+
    // Prepare the query for execution
    $query = $conn->prepare(
-      "SELECT u_id, email, first_name, last_name, phone_number FROM user WHERE u_id = ?"
+      "SELECT u_id, email, f_name, l_name, phone_number FROM user WHERE u_id = ?"
    );
 
    // Bind query parameters
-   $query->bind_param("i", $user_id);
+   $query->bind_param("i", $id);
 
    // Check to ensure that the query executed without any errors
-   if ($query->execute()) {
-      echo "Successfully retrieved user with ID" . $user_id;
-   } else {
-      echo "Error retrieving user with ID: " . $user_id;
+   if (!$query->execute()) {
+      echo "Error retrieving user with ID: " . $id;
       return null;
    }
 
    // Get the result of the query if it executed
    $result = $query->get_result();
+   $row = $result->fetch_assoc();
 
-   // Return the results of the query
-   return $result->fetch_assoc();
+   // Check to make sure the results exist and handle accordingly
+   if ($row) {
+      echo "Successfully retrieved user with ID: " . $id;
+      return $row;
+   } else {
+      echo "No user found with ID: " . $id;
+      return null;
+   }
 }
 
-/***
+/**
  * getUserLogin returns a list containing the associated ID, username,
  * and password given a user's login credentials.
  */
-function getUserLogin($conn, $email)
+function getUserLogin($email)
 {
-   # Array containing the user's username (email), password, and user id
-   $user = ['username' => $email, 'password' => '', 'u_id' => ''];
+   global $conn;
+
+   // Array containing the user's username (email), password, and user id
+   $user = ['username' => $email, 'password' => null, 'id' => null];
 
    $query = $conn->prepare(
       "SELECT u_id, user_password
-      FROM user
-      WHERE email = ?"
+         FROM user
+         WHERE email = ?"
    );
 
-   // Bind the email parameter to the ? placeholder for email in the
-   // query/statement
+   // Bind the email parameter to the ? placeholder for email in the query/statement
    $query->bind_param("s", $email);
 
    // Execute the query/statement
-   $query->execute();
+   if (!$query->execute()) {
+      echo "Error executing login query for email: " . $email;
+      return null;
+   }
 
    // Get the result of the executed query/statement
    $result = $query->get_result();
 
-   // Store the username, user id, and password if the user exists (user
-   // entered a valid email)
+   // Store the username, user id, and password if the user exists
    if ($row = $result->fetch_assoc()) {
       $user['password'] = $row['user_password'];
-      $user['u_id'] = $row['u_id'];
+      $user['id'] = $row['u_id'];
    } else {
       // No user found
-      echo ("No user found with email: " . $email);
+      echo "No user found with email: " . $email;
       return null;
    }
 
