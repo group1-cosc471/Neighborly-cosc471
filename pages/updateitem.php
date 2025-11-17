@@ -69,6 +69,7 @@ function init($id)
 
             $result = updateItem($item_id, $name, $description, $price);
 
+            //todo usually 1 is true and 0 is false traditionally
             if ($result == 0) {
                 $message = "Succesfully updated item. Thank you.";
                 header("location: index.php?page=viewitem&id={$item_id}");

@@ -74,17 +74,19 @@ function init()
         $result = postSale($street, $municipality, $s_date, $e_date, $open_time, $close_time, $sale_type);
 
         //if success, display a message stating such
-        if ($result == 0) {
+        if ($result > 0) {
             $message = "Succesfully posted sale. Thank you.";
+            header("location: index.php?page=viewsale&id={$result}");
         }
 
         //if theres an error creating the sale, show a message stating such.
-        if ($result == 1) {
+        //todo change method to return id if true, 0 if error and -1 if not logged in
+        if ($result == 0) {
             $message = "Error creating sale. Please try again.";
         }
 
         //if the user is not logged it, state that the user must login.
-        if ($result == 2) {
+        if ($result == -1) {
             $message = "Error: you must be logged in to create a sale.";
         }
         return [$message, $form];

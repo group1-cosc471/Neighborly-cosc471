@@ -17,4 +17,9 @@ function getItem($item_id) {
 function updateItem($id, $name, $description, $price){
     return 0;
 }
+
+function createItem($sale_id, $name, $description, $price) {
+    //return the new item's id
+    return 1;
+}
 ?>

@@ -40,12 +40,13 @@ function init($id)
             $message = "All fields are required.";
         } else {
             $result = createItem($sale_id, $name, $desc, $price);
-
-            if ($result == 0 || $result === true) {
+            //create item will return the item id so that we can redirect to item
+            if ($result > 0) {
                 $message = "Item created successfully.";
                 $name = "";
                 $desc = "";
                 $price = "";
+                header("location: index.php?page=viewitem&id={$result}");
             } else {
                 $message = "Error creating item.";
             }

@@ -106,6 +106,7 @@ function init($id)
             //display to the user the result of the update submission
             if ($result == 0) {
                 $message = "Succesfully updated sale. Thank you.";
+                header("location: index.php?page=viewitem&id={$sale_id}");
             }
 
             if ($result == 1) {
