@@ -1,7 +1,7 @@
 <?php
 //William Dalian
 
-function init()
+function init($user_id)
 {
     require_once '../app/db/sale.php';
     $message = "";
@@ -31,7 +31,7 @@ function init()
         $form = <<<HTML
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
             <head>
-                <Title> Update Sale </Title>
+                <Title> Create Sale </Title>
             </head>
 
             <body>
@@ -91,21 +91,15 @@ function init()
 
         //if success, display a message stating such, and redirect to the view sale page
         if ($result >= 0) {
-        //if success, display a message stating such
-        if ($result > 0) {
             $message = "Succesfully posted sale. Thank you.";
-            $id = $result;
+            $sale_id = $result;
             #redirect to view sale.
-            header("location: index.php?page=viewsale&id={$id}");
+            header("location: index.php?page=viewsale&sale_id={$sale_id}");
             exit();
-
-            header("location: index.php?page=viewsale&id={$result}");
         }
 
         //if theres an error creating the sale, show a message stating such.
         if ($result == -1) {
-        //todo change method to return id if true, 0 if error and -1 if not logged in
-        if ($result == 0) {
             $message = "Error creating sale. Please try again.";
             exit();
             
@@ -113,7 +107,6 @@ function init()
 
         //if the user is not logged it, state that the user must login.
         if ($result == -2) {
-        if ($result == -1) {
             $message = "Error: you must be logged in to create a sale.";
             exit();
         }
