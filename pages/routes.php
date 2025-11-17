@@ -9,6 +9,8 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
+//todo fix so that user cannot access pages unless logged in
+
 //sets default page to login
 $path = "index.php?page=login";
 
