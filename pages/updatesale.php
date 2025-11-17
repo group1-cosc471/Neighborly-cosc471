@@ -57,12 +57,12 @@ function init($id)
                         <input type="text" class="form-control" name="municipality" id="municipality" value="{$municipality}">
                     </div>
                     <div class="form-group">
-                        <label for="start_date" class="space">Start date</label>
-                        <input type="date" name="start_date" id="start_date" value="{$s_date}">
+                        <label for="s_date" class="space">Start date</label>
+                        <input type="date" name="s_date" id="s_date" value="{$s_date}">
                     </div>
                     <div class="form-group">
-                        <label for="end_date" class="space">End date</label>
-                        <input type="date" name="end_date" id="start_date" value="{$e_date}">
+                        <label for="e_date" class="space">End date</label>
+                        <input type="date" name="e_date" id="e_date" value="{$e_date}">
                     </div>
                     <div class="form-group">
                         <label for="open_time" class="space">Open Time</label>
@@ -91,7 +91,7 @@ function init($id)
         //when a user selects the submit button, get the user's values from the form, and
         //call the function (update sale) in sale.php to send an update request to the database
         //check to confirm that the sale does belong to the user first.
-        if (isset($_POST['update-sale']) && $sale['u_id'] == $_SESSION['user']) {
+        if (isset($_POST['update-sale']) && $sale['seller_id'] == $_SESSION['user']) {
 
             $street = $_POST['streetAddr'];
             $municipality = $_POST['municipality'];
@@ -101,11 +101,12 @@ function init($id)
             $close_time = $_POST['close_time'];
             $sale_type = $_POST['sale_type'];
 
-            $result = updateSale($sale_id, $street, $municipality, $s_date, $e_date, $open_time, $close_time, $sale_type);
+            $result = updateSale((int)$sale_id, $street, $municipality, $s_date, $e_date, $open_time, $close_time, $sale_type);
 
             //display to the user the result of the update submission
             if ($result == 0) {
                 $message = "Succesfully updated sale. Thank you.";
+                header("location: index.php?page=viewsale&id={$id}");
             }
 
             if ($result == 1) {
