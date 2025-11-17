@@ -15,27 +15,39 @@ $path = "index.php?page=login";
 //routing keeps everything under index
 if(isset($_GET['page']))
 {
-    if($_GET['page'] === "login")
-    {
+    if($_GET['page'] === "login") {
         require_once 'login.php';
         $result = init();
-    } elseif ($_GET['page'] === "listsales")
-    {
+    } elseif($_GET['page'] === "createitem") {
+        require_once 'createitem.php';
+        $result = init();
+    } elseif($_GET['page'] === "createsale") {
+        require_once 'createsales.php';
+        $result = init();
+    } elseif($_GET['page'] === "createuser") {
+        require_once 'createuser.php';
+        $result = init();
+    } elseif ($_GET['page'] === "listsales") {
         require_once 'listsales.php';
         $result = init();
-    } elseif ($_GET['page'] === "viewsale") {
-        require_once 'viewsale.php';
-        $result = init($_GET['id']); //viewsale shouldn't be called without an id
+    } elseif($_GET['page'] === "updateitem") {
+        require_once 'updateitem.php';
+        $result = init($_GET['id']);
     } elseif($_GET['page'] === "updatesale") {
         require_once 'updatesale.php';
         $result = init($_GET['id']);
-    } elseif($_GET['page'] === "createsale") {
-        require_once 'createsales.php';
-        $result = init($_GET['id']);
+    } elseif ($_GET['page'] === "updateuser") {
+        require_once 'update.php';
+        $result = init($_GET['id']); //viewsale shouldn't be called without an id
+    } elseif ($_GET['page'] === "viewitem") {
+        require_once 'viewitem.php';
+        $result = init($_GET['id']); //viewsale shouldn't be called without an id
+    } elseif ($_GET['page'] === "viewsale") {
+        require_once 'viewsale.php';
+        $result = init($_GET['id']); //viewsale shouldn't be called without an id
     } else {
         header('location:' . $path); //if no page is set set the page to login
     }
-} else 
-{
+} else {
     header('location:' . $path); //if the page variable isn't set at all set page to login
 }
