@@ -1,3 +1,8 @@
+.logo {
+    height: 10px;      /* try 40, 50, 60 until it looks right */
+    width: auto;       /* keeps aspect ratio */
+}
+
 .sale-button {
     width: 100%;
 }
