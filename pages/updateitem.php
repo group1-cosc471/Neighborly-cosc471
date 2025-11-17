@@ -8,7 +8,7 @@ function init($id)
 {
     
 
-    require_once '../app/db/item.php';
+    require_once '../app/db/items.php';
     require_once '../app/db/sale.php';
     $message = "";
   
@@ -36,7 +36,7 @@ function init($id)
 
             <body>
                 <form method=post>
-                    <h2>Update Sale</h2>
+                    <h2>Update Item</h2>
                     <div class="form-group">
                         <label for="item-name" class="space">Name</label>
                         <input type="text" class="form-control" name="item-name" id="item-name" value="{$name}">
@@ -69,8 +69,10 @@ function init($id)
 
             $result = updateItem($item_id, $name, $description, $price);
 
+            //todo usually 1 is true and 0 is false traditionally
             if ($result == 0) {
                 $message = "Succesfully updated item. Thank you.";
+                header("location: index.php?page=viewitem&id={$item_id}");
             }
 
             if ($result == 1) {

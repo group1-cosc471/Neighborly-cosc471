@@ -55,7 +55,7 @@ function init()
     }
 
     $list .= "</table>
-        <button class='btn btn-primary new-sale-button' onclick=\"window.location.href='index.php?page=createsale'\">New Sale</button>";
+        <button class='btn btn-primary new-sale-button' onclick=\"window.location.href='index.php?page=createsale&user_id={$_SESSION['user']}'\">New Sale</button>";
 
     return [$acknowlegement, $list];
 }

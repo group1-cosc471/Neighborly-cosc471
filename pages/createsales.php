@@ -91,16 +91,21 @@ function init()
 
         //if success, display a message stating such, and redirect to the view sale page
         if ($result >= 0) {
+        //if success, display a message stating such
+        if ($result > 0) {
             $message = "Succesfully posted sale. Thank you.";
             $id = $result;
             #redirect to view sale.
             header("location: index.php?page=viewsale&id={$id}");
             exit();
 
+            header("location: index.php?page=viewsale&id={$result}");
         }
 
         //if theres an error creating the sale, show a message stating such.
         if ($result == -1) {
+        //todo change method to return id if true, 0 if error and -1 if not logged in
+        if ($result == 0) {
             $message = "Error creating sale. Please try again.";
             exit();
             
@@ -108,6 +113,7 @@ function init()
 
         //if the user is not logged it, state that the user must login.
         if ($result == -2) {
+        if ($result == -1) {
             $message = "Error: you must be logged in to create a sale.";
             exit();
         }

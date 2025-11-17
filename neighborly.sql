@@ -6,7 +6,7 @@ USE neighborly_lol;
 
 CREATE TABLE
     user (
-        u_id INT UNIQUE PRIMARY KEY,
+        u_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
         f_name VARCHAR(50),
         l_name VARCHAR(50),
         email VARCHAR(100),
@@ -16,7 +16,7 @@ CREATE TABLE
 
 CREATE TABLE
     sale (
-        sale_id INT UNIQUE PRIMARY KEY,
+        sale_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
         seller_id INT,
         street_address VARCHAR(250),
         municipality VARCHAR(250),
@@ -32,7 +32,7 @@ CREATE TABLE
 
 CREATE TABLE
     item (
-        item_id INT UNIQUE PRIMARY KEY,
+        item_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
         sale_id INT,
         reserved_by INT,
         item_name VARCHAR(24),
