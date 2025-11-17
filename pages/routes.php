@@ -20,7 +20,7 @@ if(isset($_GET['page']))
         $result = init();
     } elseif($_GET['page'] === "createitem") {
         require_once 'createitem.php';
-        $result = init();
+        $result = init($_GET['sale_id']); //todo change pages to use more specific id's
     } elseif($_GET['page'] === "createsale") {
         require_once 'createsales.php';
         $result = init();

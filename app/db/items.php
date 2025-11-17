@@ -56,22 +56,55 @@ function getItemsByUser($user_id){
 
 //return the number of items in a sale based on sale id
 function itemsInSale($saleID) {
-    $items = 5;
-    return $items;
+    global $conn;
+    $query = $conn->prepare('SELECT count(*) as num_items FROM item WHERE sale_id = ?');
+    $query->bind_param("i", $saleID);
+    $query->execute();
+    $result = $query->get_result();
+    $row = $result->fetch_assoc();
+    return $row['num_items'];
 }
 
-function getItem($item_id) {
-    $item = [];
-    return $item;
-}
-
+//update an item based on it's id
 function updateItem($id, $name, $description, $price){
-    return 0;
+    global $conn;
+
+    //prepare statement
+    $stmt = $conn -> prepare('UPDATE item SET item_name = ?, item_dec = ?, item_dec = ?, price = ? WHERE item_id = ?');
+    $stmt -> bind_param("ssii", $name, $description, $price, $id);
+
+    //return result
+    if($stmt -> execute()){
+        return 1;
+    }
+    else {
+        return 0;
+    }
 }
 
+//create a new item, if successful return the id
 function createItem($sale_id, $name, $description, $price) {
-    //return the new item's id
-    return 1;
+    if (isset($_SESSION['user'])) {
+        $u_id = $_SESSION['user'];
+
+        global $conn;
+        $stmt = $conn ->prepare(
+            'INSERT INTO item (sale_id, item_name, item_dec, price)
+            VALUES (?, ?, ?, ?)');
+
+        $stmt -> bind_param("issi", $sale_id, $name, $description, $price);
+
+        if ($stmt -> execute()){
+            $item_id = $conn->insert_id;
+            return $item_id;
+        }
+        else{
+            return 0;
+        }
+    }
+    else{
+        return -1;
+    }
 }
 ?>
 
