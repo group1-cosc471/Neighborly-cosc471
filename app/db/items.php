@@ -39,7 +39,6 @@ function getItemsBySale($sale_id){
         $items_list[] = $row;
     }
     return $items_list;
-
 }
 //get items by user id
 function getItemsByUser($user_id){
@@ -53,4 +52,21 @@ function getItemsByUser($user_id){
         $items_list[] = $row;
     }
     return $items_list;
-    }
+}
+
+//return the number of items in a sale based on sale id
+function itemsInSale($saleID) {
+    $items = 5;
+    return $items;
+}
+
+function getItem($item_id) {
+    $item = [];
+    return $item;
+}
+
+function updateItem($id, $name, $description, $price){
+    return 0;
+}
+?>
+
