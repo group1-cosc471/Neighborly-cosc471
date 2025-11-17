@@ -91,14 +91,15 @@ function postSale($streetAddress, $municipality, $s_date, $e_date, $open_time, $
         $stmt -> bind_param("isssssss", $u_id, $streetAddress, $municipality, $s_date, $e_date, $open_time, $close_time, $sale_type);
 
         if ($stmt -> execute()){
-            return 0;
+            $created_id = mysqli_insert_id($conn);
+            return $created_id;
         }
         else{
-            return 1;
+            return -1;
         }
     }
     else{
-        return 2;
+        return -2;
     }
 }
 
