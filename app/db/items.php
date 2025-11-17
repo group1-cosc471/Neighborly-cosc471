@@ -5,7 +5,7 @@ require_once __DIR__ . '/database.php';
 
 //return the number of items in a sale based on sale id
 function itemsInSale($saleID) {
-    $items =[];
+    $items = 5;
     return $items;
 }
 

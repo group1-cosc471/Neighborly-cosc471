@@ -1,5 +1,9 @@
 <?php
 //Patrick Martus
+
+//login page
+//calls the get user function from the user file to get the password from the database and compares to the entered password.
+//if successful sets the  session user_id and email.
 function init() {
     $acknowlegement = '';
     require_once '../app/db/user.php';

@@ -2,7 +2,10 @@
 //Patrick Martus
 //listsales.php
 
-
+//gets all the sales from the databse via sale.php
+//presents the sales in a table and allows users to select the sale they wish to view taking them to the viewsale page
+//if the logged in user is the seller of that sale, also presents an edit button which will take the user to the updatesale page
+//additionally the new sale button found here will take the user to the createsale page
 
 function init()
 {
@@ -48,7 +51,7 @@ function init()
                          </td>";
         }
 
-        $list .= "</tr>"; //todo add seller and number of items, make sale location a link to the sale page
+        $list .= "</tr>";
     }
 
     $list .= "</table>

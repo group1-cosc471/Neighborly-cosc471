@@ -2,6 +2,9 @@
 //Patrick Martus
 //routes.php
 
+//required within the index file, the routes file manages the user's ability to see pages
+//if no user is logged in, the default page will be set to login and the user will be redirected there
+//otherwise the correct page will return its init function and the index will echo that page.
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
