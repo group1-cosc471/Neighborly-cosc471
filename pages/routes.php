@@ -23,7 +23,7 @@ if(isset($_GET['page']))
         $result = init($_GET['sale_id']); //todo change pages to use more specific id's
     } elseif($_GET['page'] === "createsale") {
         require_once 'createsales.php';
-        $result = init();
+        $result = init($_GET['user_id']);
     } elseif($_GET['page'] === "createuser") {
         require_once 'createuser.php';
         $result = init();
@@ -32,19 +32,19 @@ if(isset($_GET['page']))
         $result = init();
     } elseif($_GET['page'] === "updateitem") {
         require_once 'updateitem.php';
-        $result = init($_GET['id']);
+        $result = init($_GET['item_id']);
     } elseif($_GET['page'] === "updatesale") {
         require_once 'updatesale.php';
-        $result = init($_GET['id']);
+        $result = init($_GET['sale_id']);
     } elseif ($_GET['page'] === "updateuser") {
-        require_once 'update.php';
-        $result = init($_GET['id']); //viewsale shouldn't be called without an id
+        require_once 'updateuser.php';
+        $result = init($_GET['user_id']); //viewsale shouldn't be called without an id
     } elseif ($_GET['page'] === "viewitem") {
         require_once 'viewitem.php';
-        $result = init($_GET['id']); //viewsale shouldn't be called without an id
+        $result = init($_GET['item_id']); //viewsale shouldn't be called without an id
     } elseif ($_GET['page'] === "viewsale") {
         require_once 'viewsale.php';
-        $result = init($_GET['id']); //viewsale shouldn't be called without an id
+        $result = init($_GET['sale_id']); //viewsale shouldn't be called without an id
     } else {
         header('location:' . $path); //if no page is set set the page to login
     }
