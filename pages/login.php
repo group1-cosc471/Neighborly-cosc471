@@ -60,6 +60,7 @@ function init() {
                 </div>
                 <input type="submit" name="login" class="btn btn-primary">&nbsp;&nbsp;
             </form>
+            <button class="btn btn-primary" onclick="window.location.href='index.php?page=createuser'">Create User</button>
         </body> 
     HTML;
 
