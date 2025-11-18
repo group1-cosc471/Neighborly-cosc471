@@ -49,17 +49,29 @@ function updateUser($id, $f_name, $l_name, $username, $password, $phone_number)
 {
    global $conn;
 
+   // Only hash the user's password if they entered a new password
+   if (!empty($password)) {
+      // Hashed password using bcrypt algorithm
+      $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+   } else {
+      $loginQuery = $conn->prepare("SELECT user_password FROM user WHERE u_id = ?");
+      $loginQuery->bind_param("i", $id);
+      $loginQuery->execute();
+      $result = $loginQuery->get_result();
+      $row = $result->fetch_assoc();
+      $hashed_password = $row['user_password'];
+   }
    // SQL query to update all of the user account details upon form submission
    $stmt = $conn->prepare('UPDATE user
-                              SET f_name = ?,
-                              l_name = ?,
-                              email = ?,
-                              password = ?,
-                              phone_number = ?
-                              WHERE u_id = ?');
+                           SET f_name = ?,
+                           l_name = ?,
+                           email = ?,
+                           user_password = ?,
+                           phone_number = ?
+                           WHERE u_id = ?');
 
    // Bind parameters to user attributes
-   $stmt->bind_param("sssssi", $f_name, $l_name, $username, $password, $phone_number, $id);
+   $stmt->bind_param("sssssi", $f_name, $l_name, $username, $hashed_password, $phone_number, $id);
 
    // Return 0 upon success and 1 upon failure of executing the SQL statement
    if ($stmt->execute()) {
@@ -132,7 +144,7 @@ function getUserById($id)
 
    // Check to make sure the results exist and handle accordingly
    if ($row) {
-      echo "Successfully retrieved user with ID: " . $id;
+      // echo "Successfully retrieved user with ID: " . $id;
       return $row;
    } else {
       echo "No user found with ID: " . $id;
@@ -175,7 +187,7 @@ function getUserLogin($email)
       $user['id'] = $row['u_id'];
    } else {
       // No user found
-      echo "No user found with email: " . $email;
+      // echo "No user found with email: " . $email;
       return null;
    }
 

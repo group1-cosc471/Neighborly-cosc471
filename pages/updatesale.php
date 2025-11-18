@@ -10,7 +10,7 @@ function init($id)
 
     require_once '../app/db/sale.php';
     $message = "";
-  
+
     $street =  "";
     $municipality =  "";
     $s_date =  "";
@@ -106,7 +106,7 @@ function init($id)
             //display to the user the result of the update submission
             if ($result == 0) {
                 $message = "Succesfully updated sale. Thank you.";
-                header("location: index.php?page=viewitem&id={$sale_id}");
+                header("location: index.php?page=viewsale&sale_id={$sale_id}");
             }
 
             if ($result == 1) {
