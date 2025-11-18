@@ -1,3 +1,8 @@
+body {
+    background-color: #416788; /* or any other color */
+    color: #fff
+}
+
 .logo {
     height: 10px;      /* try 40, 50, 60 until it looks right */
     width: auto;       /* keeps aspect ratio */
@@ -5,4 +10,29 @@
 
 .sale-button {
     width: 100%;
+}
+
+.btn-primary {
+    background-color: #154734;
+    border-color: #154734;
+    color: white;
+    width: 100%;
+}
+
+.btn-primary:hover {
+    background-color: #97b357 !important;
+    border-color: #97b357 !important;
+    color: #fff !important;
+}
+
+.btn-secondary {
+    background-color: #B5BAD0;
+    border-color: #B5BAD0;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #7389AE !important;
+    border-color: #7389AE !important;
+    color: #fff !important;
 }

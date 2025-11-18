@@ -8,6 +8,7 @@ require_once('routes.php');
 <html>
     <head>
         <title>neighborly</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel="stylesheet" href="../public/assets/css/neighborly.css">
         <link rel="stylesheet" href="../public/styles/main.css">
     </head>
@@ -16,9 +17,9 @@ require_once('routes.php');
     <img src="../images/logo1.png" alt="Neighborly Logo" class="logo" style="height:60px !important; width:auto !important;"">
         <h1>Neighborly</h1>
         <nav>
-            <a href="index.php?page=login">Login</a> |
-            <a href="index.php?page=listsales">List Sales</a> |
-            <a href="index.php?page=createsale">Create Sale</a>
+            <a class="btn btn-secondary" href="index.php?page=login">Login</a> |
+            <a class="btn btn-secondary" href="index.php?page=listsales">List Sales</a> |
+            <a class="btn btn-secondary" href="index.php?page=createsale">Create Sale</a>
         </nav>
         <hr>
     </header>
