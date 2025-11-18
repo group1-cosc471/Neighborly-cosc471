@@ -36,7 +36,7 @@ function init()
         $numItems = itemsInSale($sale['sale_id']);
         $list .= "<tr>
                     <td>
-                        <button class='btn btn-primary sale-button' onclick=\"window.location.href='index.php?page=viewsale&id={$sale['sale_id']}'\">
+                        <button class='btn btn-primary sale-button' onclick=\"window.location.href='index.php?page=viewsale&sale_id={$sale['sale_id']}'\">
                         {$sale['street_address']}, {$sale['municipality']}
                         </button>
                     </td>
@@ -45,7 +45,7 @@ function init()
         if (isset($_SESSION['user'])) {
             if($_SESSION['user'] == $sale['seller_id'])
                 $list .= "<td>
-                            <button class='btn btn-primary sale-button' onclick=\"window.location.href='index.php?page=updatesale&id={$sale['sale_id']}'\">
+                            <button class='btn btn-primary sale-button' onclick=\"window.location.href='index.php?page=updatesale&sale_id={$sale['sale_id']}'\">
                                 Edit
                             </button>
                          </td>";
