@@ -1,7 +1,7 @@
 <?php
 
 //placeholder
-function init($id) {
-    return $id;
+function init($item_id) {
+    return $item_id;
 }
 ?>

@@ -22,7 +22,7 @@ function init($id)
         $item_id = $id;
 
         //retrieve the current values
-        $item = getItem($sale_id);
+        $item = getItem($item_id);
         $name = $item['item_name'];
         $description = $item['item_dec'];
         $price = $item['price'];
