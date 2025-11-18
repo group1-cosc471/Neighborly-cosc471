@@ -1,6 +1,10 @@
 <?php
 // Zinet Hyssen
 // createitem.php
+// Displays a form to create a new item for an existing sale.
+// Checks if the user is logged in, if not, requests login
+// Validates the submission
+// Redirects to view item if successful submission. 
 
 
 function init($id)

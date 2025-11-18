@@ -1,5 +1,9 @@
 <?php
 //index.php
+// Zinet Hyssen
+// Acts as the front controller
+// Displays the page returned byt routes.php
+// provides consistent header, footer and navigation across the application
 
 require_once('routes.php');
 
