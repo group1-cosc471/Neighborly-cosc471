@@ -13,8 +13,8 @@ require_once('routes.php');
         <link rel="stylesheet" href="../public/styles/main.css">
     </head>
 <body class="container">
-   <header class="site-header">
-    <img src="../images/logo1.png" alt="Neighborly Logo" class="logo" style="height:60px !important; width:auto !important;"">
+    <header class="site-header">
+        <img src="../images/logo.png" alt="Neighborly Logo" class="logo" style="height:60px !important; width:auto !important;">
         <h1>Neighborly</h1>
         <nav>
             <a class="btn btn-secondary" href="index.php?page=login">Login</a> |
@@ -33,4 +33,5 @@ require_once('routes.php');
         <p>&copy; 2025 Neighborly</p>
     </footer>
 </body>
+
 </html>

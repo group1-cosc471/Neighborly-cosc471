@@ -11,7 +11,7 @@ CREATE TABLE
         l_name VARCHAR(50),
         email VARCHAR(100),
         phone_number VARCHAR(10), /*Phone numbers from US and CA*/
-        user_password VARCHAR(50)
+        user_password VARCHAR(255) /*Hashed password using bcrypt*/
     );
 
 CREATE TABLE

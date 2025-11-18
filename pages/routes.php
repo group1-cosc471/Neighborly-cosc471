@@ -15,32 +15,31 @@ if (session_status() == PHP_SESSION_NONE) {
 $path = "index.php?page=login";
 
 //routing keeps everything under index
-if(isset($_GET['page']))
-{
-    if($_GET['page'] === "login") {
+if (isset($_GET['page'])) {
+    if ($_GET['page'] === "login") {
         require_once 'login.php';
         $result = init();
-    } elseif($_GET['page'] === "createitem") {
+    } elseif ($_GET['page'] === "createitem") {
         require_once 'createitem.php';
         $result = init($_GET['sale_id']); //todo change pages to use more specific id's
-    } elseif($_GET['page'] === "createsale") {
+    } elseif ($_GET['page'] === "createsale") {
         require_once 'createsales.php';
         $result = init($_GET['user_id']);
-    } elseif($_GET['page'] === "createuser") {
+    } elseif ($_GET['page'] === "createuser") {
         require_once 'createuser.php';
         $result = init();
     } elseif ($_GET['page'] === "listsales") {
         require_once 'listsales.php';
         $result = init();
-    } elseif($_GET['page'] === "updateitem") {
+    } elseif ($_GET['page'] === "updateitem") {
         require_once 'updateitem.php';
         $result = init($_GET['item_id']);
-    } elseif($_GET['page'] === "updatesale") {
+    } elseif ($_GET['page'] === "updatesale") {
         require_once 'updatesale.php';
         $result = init($_GET['sale_id']);
     } elseif ($_GET['page'] === "updateuser") {
         require_once 'updateuser.php';
-        $result = init($_GET['user_id']); //viewsale shouldn't be called without an id
+        $result = init($_GET['user_id']);
     } elseif ($_GET['page'] === "viewitem") {
         require_once 'viewitem.php';
         $result = init($_GET['item_id']); //viewsale shouldn't be called without an id
