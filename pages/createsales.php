@@ -17,11 +17,11 @@ function init($user_id)
     $close_time =  "";
     $sale_type =  "";
 
-    $form;
+    $form = "";
 
     //if user is set
     if (isset($_SESSION['user'])) {
-        $seller_id = $_SESSION['user'];
+        $seller_id = $_SESSION['user']; //todo set seller id when sale is created
 
         $street = "Street Address";
         $municipality = "Town / City";

@@ -2,7 +2,7 @@
 //index.php
 
 require_once('routes.php');
-
+//todo fix create button
 ?>
 
 <html>
@@ -19,7 +19,7 @@ require_once('routes.php');
         <nav>
             <a class="btn btn-secondary" href="index.php?page=login">Login</a> |
             <a class="btn btn-secondary" href="index.php?page=listsales">List Sales</a> |
-            <a class="btn btn-secondary" href="index.php?page=createsale">Create Sale</a>
+            <a class="btn btn-secondary" href="index.php?page=createsale">Create Sale</a> 
         </nav>
         <hr>
     </header>

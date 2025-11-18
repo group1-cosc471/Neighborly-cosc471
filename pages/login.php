@@ -32,7 +32,7 @@ function init()
             if ($user && !empty($user['password'])) {
                 //check if the password is a match
                 if (password_verify($password, $user['password'])) {
-                    $_SESSION['user'] = $user['item_id'];
+                    $_SESSION['user'] = $user['id'];
                     $_SESSION['name'] = $user['email']; //todo set to first and last name
 
                     header("location: index.php?page=listsales");
