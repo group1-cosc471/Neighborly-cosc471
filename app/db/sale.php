@@ -17,19 +17,16 @@ $sale_municipality;
 //get all sales: prepares a select all statement, and the quereies 
 // the database and retuns a list of all sales.
 function getAllSales(){
-    //I guess this is required for use inside php functions, my last project just used individual files so my bad
     global $conn;
     $sales_list = [];
 
-    //syntax for defining query requires the connecttion to the database
     $query = 
         'SELECT *
         FROM sale';
     $result = $conn->query($query);
 
-    while ($row = $result->fetch_assoc()) { //use to get row from result
-        //append to an array like this othe
-        $sales_list[] = $row; //append row to list
+    while ($row = $result->fetch_assoc()) {
+        $sales_list[] = $row;
     }
 
     return $sales_list;
@@ -56,14 +53,13 @@ function getSale($id)
 //returns them all as a list
 function getSalesBySeller($s_id)
 {
-    //syntax for prepared statements is correct in this function. apply to other functions
     global $conn;
     $sales_list = [];
-    //table name is case sensitive
+
     $query = $conn->prepare('SELECT *
         FROM sale
         WHERE seller_id = ?');
-    $query->bind_param("i", $s_id); //this is how to add variables to prepared statements
+    $query->bind_param("i", $s_id); 
     $query->execute();
 
     $result = $query->get_result();
