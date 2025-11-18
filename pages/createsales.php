@@ -1,9 +1,14 @@
 <?php
 //William Dalian
+//createsales.php:
 //Displays the form to add a sale to the database.
 //checks if a user is logged in, if so displays the form
-//Then on submit, gets the values from the posted form. Then calls sale.php to create and execute
+//Then on submit, gets the values from the posted form. Then calls
+//createsale() in sale.php with the data from the form post to create and execute
 //the create request for the resource.
+//If successful, it returns a success message and redirects the user to the view
+//sale page for the created sale.
+//Otherwise, displays an error message.
 function init($user_id)
 {
     require_once '../app/db/sale.php';
