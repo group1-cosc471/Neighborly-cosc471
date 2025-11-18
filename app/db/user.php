@@ -7,8 +7,8 @@ require_once __DIR__ . '/database.php';
 /**
  * createUser is called whenever a user decides to sign up and create
  * an account on the website. The fields entered by the user are
- * inserted into the database upon success, and an auto-incremented user
- * ID is also assigned.
+ * inserted into the neighborly_lol MySQL database upon success, and an 
+ * auto-incremented user ID is also assigned.
  */
 function createUser($username, $password, $f_name, $l_name, $phone_number)
 {
@@ -41,6 +41,34 @@ function createUser($username, $password, $f_name, $l_name, $phone_number)
 }
 
 /**
+ * updateUser updates the user's account details in the neighborly_lol
+ * MySQL database when the user makes a post request on the update user 
+ * page. 
+ */
+function updateUser($id, $f_name, $l_name, $username, $password, $phone_number)
+{
+   global $conn;
+
+   // SQL query to update all of the user account details upon form submission
+   $stmt = $conn->prepare('UPDATE user
+                              SET f_name = ?,
+                              l_name = ?,
+                              email = ?,
+                              password = ?,
+                              phone_number = ?
+                              WHERE u_id = ?');
+
+   // Bind parameters to user attributes
+   $stmt->bind_param("sssssi", $f_name, $l_name, $username, $password, $phone_number, $id);
+
+   // Return 0 upon success and 1 upon failure of executing the SQL statement
+   if ($stmt->execute()) {
+      return 0;
+   }
+   return 1;
+}
+
+/**
  * getUserFullName retrieves the user's first and last name given their 
  * auto-incremented user ID.
  */
@@ -55,7 +83,7 @@ function getUserFullName($id)
          WHERE u_id = ?"
    );
 
-   // Bind parameters
+   // Bind id parameter to u_id user attribute
    $query->bind_param("i", $id);
 
    // Run the query
