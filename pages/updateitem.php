@@ -6,12 +6,12 @@
 //on sumbmit calls the update form method from the item class and attempts to add the item to the database
 function init($id)
 {
-    
+
 
     require_once '../app/db/items.php';
     require_once '../app/db/sale.php';
     $message = "";
-  
+
     $name =  "";
     $description =  "";
     $price =  "";
@@ -53,7 +53,7 @@ function init($id)
                     </form>
 
                 <?php if (!empty($message)): ?>
-                    <div class="user-message">
+                    <div class="$user-message">
                         <?php echo $message; ?>
                     </div>
                 <?php endif; ?>
@@ -72,7 +72,7 @@ function init($id)
             //todo usually 1 is true and 0 is false traditionally
             if ($result == 0) {
                 $message = "Succesfully updated item. Thank you.";
-                header("location: index.php?page=viewitem&id={$item_id}");
+                header("location: index.php?page=viewitem&item_id={$item_id}");
             }
 
             if ($result == 1) {

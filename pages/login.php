@@ -4,11 +4,12 @@
 //login page
 //calls the get user function from the user file to get the password from the database and compares to the entered password.
 //if successful sets the  session user_id and email.
-function init() {
-    $acknowlegement = '';
+function init()
+{
+    $acknowledgement = null;
     require_once '../app/db/user.php';
 
-    if(session_status() == PHP_SESSION_NONE) {
+    if (session_status() == PHP_SESSION_NONE) {
         session_start();
     }
 
@@ -17,35 +18,47 @@ function init() {
 
         $email = $_REQUEST['email'];
         $password = $_REQUEST['password'];
-        
-        // //create bindings
-        // $credentials = [[':email', $email, 'str']];
-        
-        //execute the statement
-        $user = getUserLogin( $email);
-        
-        //if a password and a status are returned from the database
-        if (!empty($user['password'])) {
-            
-            //check if the password is a match
-            if($user['password']===$password) {
-                $_SESSION['user']= $user['u_id'];
-                $_SESSION['name']=$user['email']; //todo set to first and last name
 
-                header("location: index.php?page=listsales");
-                exit();
-            } else { $aknowlegement = 'invalid password'; }
+        if (empty($email) || empty($password)) {
+            $acknowledgement = 'Please enter both email and password';
         } else {
-            $acknowlegement = 'invalid email';
+            // //create bindings
+            // $credentials = [[':email', $email, 'str']];
+
+            //execute the statement
+            $user = getUserLogin($email);
+
+            //if a password and a status are returned from the database
+            if ($user && !empty($user['password'])) {
+                //check if the password is a match
+                if (password_verify($password, $user['password'])) {
+                    $_SESSION['user'] = $user['item_id'];
+                    $_SESSION['name'] = $user['email']; //todo set to first and last name
+
+                    header("location: index.php?page=listsales");
+                    exit();
+                } else {
+                    $acknowledgement = 'Invalid password';
+                }
+            } else {
+                $acknowledgement = 'Invalid email';
+            }
         }
     }
 
+    // Build error message HTML outside heredoc
+    $errorMessage = '';
+    if (!empty($_REQUEST['login']) && $acknowledgement != null) {
+        $errorMessage = <<<HTML
+        <div class="alert alert-danger" role="alert">
+            {$acknowledgement}
+        </div>
+HTML;
+    }
 
-    
     $form = <<<HTML
     <head>
             <title>Login</title>
-            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         </head>
         <body class="container">
             <form method="post">
@@ -60,10 +73,9 @@ function init() {
                 </div>
                 <input type="submit" name="login" class="btn btn-primary">&nbsp;&nbsp;
             </form>
+             {$errorMessage}
         </body> 
     HTML;
 
-    return [$acknowlegement, $form];
+    return [$acknowledgement, $form];
 }
-
-?>

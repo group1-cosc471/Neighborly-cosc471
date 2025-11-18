@@ -32,7 +32,7 @@ function init()
     //append each sale from the database into the table
     foreach ($sales as $sale) {
         
-        $host = getFirstAndLastName($sale['seller_id']);
+        $host = getUserFullName($sale['seller_id']);
         $numItems = itemsInSale($sale['sale_id']);
         $list .= "<tr>
                     <td>
