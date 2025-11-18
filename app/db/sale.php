@@ -2,7 +2,7 @@
 //William Dalian
 //sale.php: Uses the stablished database.php connection. Provides functionality to
 //get all sales, sale by sale id, sale by seller id, as well as posting
-//a new sale by sell_id, and updating an existing sale by sale_id.
+//a new sale, and updating an existing sale by sale_id.
 
 
 //use this to get the database connection

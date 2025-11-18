@@ -1,12 +1,16 @@
 <?php
+ //William Dalian
+ //Updates the selected sale.
+ //updatesale.php
+ //Retrieves the current values for the attributes for the selected sale. Prefills a form with those values,
+ //and allows the user to change the values. On submission, gets the values from
+ // the form post, and calls updateSale() in sale.php with the posted values and the sale id
+ //to make an SQL request to the database to update the values for this sale.
+ //Also redirects to the view sale page  for this sale on successful creation,
+ //displays a success or error message as appropriate for the result
 function init($id)
 {
-    //William Dalian
-    //Updates the selected sale.
-
-    //Retrieves the current values for the attributes for the selected sale. Prefills a form with those values,
-    //and allows the user to change the values. On submission, gets the values, and calls updateSale in sale.php
-    //to make an SQL request to the database to update the values for this sale.
+   
 
     require_once '../app/db/sale.php';
     $message = "";
@@ -103,6 +107,7 @@ function init($id)
             $result = updateSale((int)$sale_id, $street, $municipality, $s_date, $e_date, $open_time, $close_time, $sale_type);
 
             //display to the user the result of the update submission
+            //and redirect if successful
             if ($result == 0) {
                 $message = "Succesfully updated sale. Thank you.";
                 header("location: index.php?page=viewsale&sale_id={$sale_id}");
