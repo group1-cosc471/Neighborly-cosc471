@@ -21,7 +21,7 @@ function init($id)
     }
 
     // Get items for this sale
-    $items = getItemsForSale($id);
+    $items = getItemsbySale($id);
 
     // Build item cards
     $itemList = "";
@@ -29,12 +29,12 @@ function init($id)
         foreach ($items as $item) {
 
             $itemList .= <<<HTML
-            <div class="card mt-3">
-                <div class="card-body">
-                    <h5>{$item['itemname']}</h5>
-                    <p>{$item['itemDesc']}</p>
+            <div>
+                <div>
+                    <h5>{$item['item_name']}</h5>
+                    <p>{$item['item_dec']}</p>
                     <p><strong>Price:</strong> \${$item['price']}</p>
-                    <a class="btn btn-primary" href="index.php?page=viewitem&id={$item['item_id']}">
+                    <a class="btn btn-primary" href="index.php?page=viewitem&item_id={$item['item_id']}">
                         View Item
                     </a>
                 </div>
