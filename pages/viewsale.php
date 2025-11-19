@@ -1,11 +1,62 @@
 <?php
+// Sadman Khan
+// viewsale.php
 
-function init($sale_id)
+function init($id)
 {
-    //return a string with page html
+    require_once '../app/db/sale.php';
+    require_once '../app/db/items.php';
 
-    //should show all sale information as well as a list of the items at this particular sale
+    $message = "";
 
-    //should also have an add item button and edit buttons that show up if the user is the seller
-    return [null, "sale_id = " . $sale_id];
+    // Make sure ID exists
+    if (!isset($id)) {
+        return ["Invalid sale ID", "<p>Sale not found.</p>"];
+    }
+
+    // Fetch sale
+    $sale = getSale($id);
+    if (!$sale) {
+        return ["Sale not found", "<p>Invalid sale.</p>"];
+    }
+
+    // Get items for this sale
+    $items = getItemsForSale($id);
+
+    // Build item cards
+    $itemList = "";
+    if ($items && count($items) > 0) {
+        foreach ($items as $item) {
+
+            $itemList .= <<<HTML
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h5>{$item['itemname']}</h5>
+                    <p>{$item['itemDesc']}</p>
+                    <p><strong>Price:</strong> \${$item['price']}</p>
+                    <a class="btn btn-primary" href="index.php?page=viewitem&id={$item['item_id']}">
+                        View Item
+                    </a>
+                </div>
+            </div>
+            HTML;
+        }
+    } else {
+        $itemList = "<p>No items listed for this sale yet.</p>";
+    }
+
+    // Build final HTML page
+    $form = <<<HTML
+        <h2>{$sale['street_address']}, {$sale['municipality']}</h2>
+        <hr>
+
+        <h3>Items in this Sale</h3>
+        {$itemList}
+
+        <br>
+        <a class="btn btn-secondary" href="index.php?page=listsales">Back to Sales</a>
+    HTML;
+
+    return [$message, $form];
 }
+?>
