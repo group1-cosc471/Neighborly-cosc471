@@ -70,7 +70,7 @@ function updateItem($id, $name, $description, $price){
     global $conn;
 
     //prepare statement
-    $stmt = $conn -> prepare('UPDATE item SET item_name = ?, item_dec = ?, item_dec = ?, price = ? WHERE item_id = ?');
+    $stmt = $conn -> prepare('UPDATE item SET item_name = ?, item_dec = ?, price = ? WHERE item_id = ?');
     $stmt -> bind_param("ssii", $name, $description, $price, $id);
 
     //return result

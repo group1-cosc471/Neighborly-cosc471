@@ -9,14 +9,13 @@ body {
 }
 
 .sale-button {
-    width: 100%;
+    width: 50%;
 }
 
 .btn-primary {
     background-color: #154734;
     border-color: #154734;
     color: white;
-    width: 50%;
 }
 
 .btn-primary:hover {

@@ -14,11 +14,8 @@ function init($item_id)
     $item = getItem($item_id);
     $sale = getSale($item['sale_id']);
     $page = <<<HTML
-        <head>
-            <title>{$item['item_name']}</title>
-        </head>
-
         <body>
+            <h2>{$item['item_name']}</h2>
             Description:
             <div>{$item['item_dec']}</div>
             Sale:
@@ -32,8 +29,8 @@ function init($item_id)
     HTML;
 
     if (isset($_SESSION['user'])) {
-            if($_SESSION['user'] == $sale['seller_id'])
-                $page .= "<button class='btn btn-primary item-button' onclick=\"window.location.href='index.php?page=updateitem&item_id={$item['item_id']}'\">
+        if ($_SESSION['user'] == $sale['seller_id'])
+            $page .= "<button class='btn btn-primary item-button' onclick=\"window.location.href='index.php?page=updateitem&item_id={$item['item_id']}'\">
                                 Edit
                             </button>";
     }

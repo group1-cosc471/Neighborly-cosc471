@@ -24,7 +24,7 @@ function init() {
             $acknowlegement = "All fields are required.";
         } else {
             // try to create user (function from user.php)
-            $result = createUser($f_name, $l_name, $email, $phone, $password);
+            $result = createUser($email, $password, $f_name, $l_name, $phone);
 
             if ($result == -1) {
                 $acknowlegement = "A user with that email already exists.";
@@ -41,7 +41,6 @@ function init() {
 $form = <<<HTML
 <head>
     <title>Create User</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 
 <body class="container">

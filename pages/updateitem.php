@@ -28,53 +28,49 @@ function init($id)
         $price = $item['price'];
 
         //build the form with those values
+        $escPrice = htmlspecialchars($price);
+
         $form = <<<HTML
-            <head>
-                <Title> Update Sale </Title>
-            </head>
+                    <head>
+                        <Title> Update Sale </Title>
+                    </head>
 
-            <body>
-                <form method=post>
-                    <h2>Update Item</h2>
-                    <div class="form-group">
-                        <label for="item-name" class="space">Name</label>
-                        <input type="text" class="form-control" name="item-name" id="item-name" value="{$name}">
-                    </div>
-                    <div class="form-group">
-                        <label for="description" class="space">Description</label>
-                        <input type="text" class="form-control" name="description" id="description" value="{$description}">
-                    </div>
-                    <div class="form-group">
-                        <label for="start_date" class="space">Price</label>
-                        <input type="text" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="$0.00" name="price" id="price" value="{$price}">
-                    </div>
-                    <input type="submit" name="update-item" class="btn btn-primary" value="Update Item">&nbsp;&nbsp;
-                    </form>
-
-                <?php if (!empty($message)): ?>
-                    <div class="$user-message">
-                        <?php echo $message; ?>
-                    </div>
-                <?php endif; ?>
-            </body>
-            HTML;
+                    <body>
+                        <form method="post">
+                            <h2>Update Item</h2>
+                            <div class="form-group">
+                                <label for="item-name" class="space">Name</label>
+                                <input type="text" class="form-control" name="item-name" id="item-name" value="{$name}">
+                            </div>
+                            <div class="form-group">
+                                <label for="description" class="space">Description</label>
+                                <input type="text" class="form-control" name="description" id="description" value="{$description}">
+                            </div>
+                            <div class="form-group">
+                                <label for="start_date" class="space">Price</label>
+                                <input type="number" class="form-control" name="price" step="0.01" value="{$price}">
+                            </div>
+                            <input type="submit" name="update-item" class="btn btn-primary" value="Update Item">&nbsp;&nbsp;
+                        </form>
+                    </body>
+                HTML;
 
         //if the form was submitted and the user is correct, call the function and attempt to update the item in the database
         if (isset($_POST['update-item']) && getSale($item['sale_id'])['seller_id'] == $_SESSION['user']) {
 
-            $name = $_POST['name'];
+            $name = $_POST['item-name'];
             $description = $_POST['description'];
             $price = $_POST['price'];
 
             $result = updateItem($item_id, $name, $description, $price);
 
             //todo usually 1 is true and 0 is false traditionally
-            if ($result == 0) {
+            if ($result == 1) {
                 $message = "Succesfully updated item. Thank you.";
                 header("location: index.php?page=viewitem&item_id={$item_id}");
             }
 
-            if ($result == 1) {
+            if ($result == 0) {
                 $message = "Error updating item. Please try again.";
             } else {
                 $message = "Please login to the correct account before updating an item.";

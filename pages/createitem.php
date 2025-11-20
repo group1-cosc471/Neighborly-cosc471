@@ -2,6 +2,7 @@
 // Zinet Hyssen
 // createitem.php
 
+//todo either add formatting for dollar ammount or handle reformatting entered ammounts
 
 function init($id)
 {
@@ -46,7 +47,7 @@ function init($id)
                 $name = "";
                 $desc = "";
                 $price = "";
-                header("location: index.php?page=viewitem&id={$result}");
+                header("location: index.php?page=viewitem&item_id={$result}");
             } else {
                 $message = "Error creating item.";
             }
@@ -75,7 +76,7 @@ function init($id)
             <input type="submit" name="create-item" class="btn btn-primary" value="Create Item">
             &nbsp;&nbsp;
             <button type="button" class="btn btn-secondary"
-                onclick="window.location.href='index.php?page=viewsale&id={$sale_id}'">
+                onclick="window.location.href='index.php?page=viewsale&sale_id={$sale_id}'">
                 Back to Sale
             </button>
         </form>
